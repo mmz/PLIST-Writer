@@ -16,8 +16,6 @@
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstCallMethod.cs" caret="864" fromTop="21" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:Plist.cs" caret="277" fromTop="7" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:Utils/f:ReflectionUtils.cs" caret="641" fromTop="16" />
-      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:PlistWriterObs.cs" caret="20168" fromTop="33" />
-      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ExperimentalPlistWriter.cs" caret="1224" fromTop="33" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="1121" fromTop="0" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstValueToAddr.cs" caret="75" fromTop="2" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewObject.cs" caret="143" fromTop="5" />
@@ -36,7 +34,6 @@
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Interfaces/f:IAstRefOrValue.cs" caret="152" fromTop="6" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:PlistWriter.cs" caret="2098" fromTop="19" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:TypeWriterBase.cs" caret="473" fromTop="19" />
-      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterBuilder.cs" caret="5897" fromTop="22" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterStore.cs" caret="793" fromTop="19" />
       <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="4026" fromTop="34" />
     </RecentFiles>
@@ -64,7 +61,6 @@
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteField.cs" caret="114" fromTop="3" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadLocal.cs" caret="103" fromTop="3" />
       <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="1165" fromTop="21" />
-      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterBuilder.cs" caret="5897" fromTop="22" />
       <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterStore.cs" caret="1450" fromTop="67" />
       <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="6472" fromTop="15" />
       <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="6472" fromTop="36" />
