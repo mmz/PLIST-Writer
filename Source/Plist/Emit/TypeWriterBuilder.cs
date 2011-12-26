@@ -142,12 +142,25 @@ namespace Plist.Emit
 						? Nullable.GetUnderlyingType(property.PropertyType)
 						: property.PropertyType
 					);
-
-					tb.Add(
-						testM != null
-							? Ast.This.CallVoid(testM, locWriter.RoA(), locObj.RoA().ReadProp(property))
-							: locWriter.Ref().CallVoid("Write", locObj.RoA().ReadProp(property))
-						);
+					if(testM != null)
+					{
+						var locPropVal = ilGen.DeclareLocal(typeof(object));
+						tb.Add(
+							new AstWriteLocal
+								{
+									localIndex = locPropVal.LocalIndex,
+									localType = locPropVal.LocalType,
+									value = locObj.RoA().ReadProp(property)
+								}
+							);
+						tb.Add(
+							Ast.This.CallVoid(testM, locWriter.RoA(), locPropVal.Ref())
+							);
+					}
+					else
+					{
+						tb.Add(locWriter.Ref().CallVoid("Write", locObj.RoA().ReadProp(property)));
+					}
 				}
 
 				#region Check property value supression
