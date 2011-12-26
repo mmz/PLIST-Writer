@@ -1,6 +1,6 @@
 ﻿namespace Plist
 {
-	public interface IPlistWritable
+	public interface IPlistSerializable
 	{
 		void Write(PlistWriter writer);
 	}

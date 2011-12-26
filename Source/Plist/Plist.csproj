@@ -97,7 +97,7 @@
     <Compile Include="Emit\DynamicAssemblyManager.cs" />
     <Compile Include="Emit\TypeWriterBuilder.cs" />
     <Compile Include="Emit\WriterStore.cs" />
-    <Compile Include="IPlistWritable.cs" />
+    <Compile Include="IPlistSerializable.cs" />
     <Compile Include="PlistWriter.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Plist.cs" />

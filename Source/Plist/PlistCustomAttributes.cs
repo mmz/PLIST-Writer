@@ -11,10 +11,10 @@ namespace Plist
 	{ }
 
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public class PlistPropertyAttribute : Attribute
+	public class PlistKeyAttribute : Attribute
 	{
 		public string Name { get; private set; }
-		public PlistPropertyAttribute(string name)
+		public PlistKeyAttribute(string name)
 		{
 			if(string.IsNullOrEmpty(name))
 				throw new ArgumentException("name");
