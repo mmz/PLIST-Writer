@@ -197,7 +197,7 @@ namespace Plist.Test
 				FullName = "John Doe",
 				MoreColors = MixedColors.Cyan | MixedColors.Yellow,
 				Person = new TestClass(2, "Joe Cox", 39, new[] { "Prius", "SkyLine" }),
-				Person2 = new TestClass2(7, "Joe Richardson", 39, new[] { "Porsche Cayenne", "BMW M5" }),
+				Person2 = new TestClass2(7, "Joe Richardson", 39, new[] { "DeLorean", "BMW Z8" }),
 				NInt = 10
 				,
 				Dict = new Dictionary<string, object>{
@@ -694,7 +694,7 @@ namespace Plist.Test
 				FullName = "John Doe",
 				MoreColors = MixedColors.Cyan | MixedColors.Yellow,
 				Person = new TestClass(2, "Joe Cox", 39, new[] { "Prius", "SkyLine" }),
-				Person2 = new TestClass2(7, "Joe Richardson", 39, new[] { "Porsche Cayenne", "BMW M5" }),
+				Person2 = new TestClass2(7, "Joe Richardson", 39, new[] { "DeLorean", "BMW Z8" }),
 				NInt = 10
 				,
 				Dict = new Dictionary<string, object>{
@@ -748,8 +748,8 @@ namespace Plist.Test
 			<integer>39</integer>
 			<key>Cars</key>
 			<array>
-				<string>Porsche Cayenne</string>
-				<string>BMW M5</string>
+				<string>DeLorean</string>
+				<string>BMW Z8</string>
 			</array>
 		</dict>
 		<key>NInt</key>
@@ -805,8 +805,12 @@ namespace Plist.Test
 
 			Assert.Equal(expected, actual);//, "Parsing Class did not return the expected value.");
 		}
-
-
+		[Serializable]
+		public class DSTest
+		{
+			public string Title { get; set; }
+			public DataSet Data { get; set; }
+		}
 		[Fact]
 		public void CreateDocumentFromDataSet()
 		{
@@ -860,6 +864,40 @@ namespace Plist.Test
 			actual = value.ToPlistDocument();
 
 			Assert.Equal(expected, actual);//"Parsing DataSet did not return the expected value.");
+
+			var dstst = new DSTest {Title = "DataSet Title", Data = value};
+
+			actual = dstst.ToPlistDocument();
+			expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<!DOCTYPE plist PUBLIC ""-//Apple//DTD PLIST 1.0//EN"" ""http://www.apple.com/DTDs/PropertyList-1.0.dtd"">
+<plist version=""1.0"">
+	<dict>
+		<key>Title</key>
+		<string>DataSet Title</string>
+		<key>Data</key>
+		<array>
+			<array>
+				<dict>
+					<key>Id</key>
+					<integer>6</integer>
+					<key>Name</key>
+					<string>John Whizzle</string>
+					<key>Age</key>
+					<integer>27</integer>
+					<key>DOB</key>
+					<date>1978-01-03T00:00:00Z</date>
+					<key>Height</key>
+					<real>1.64</real>
+					<key>IsEmployed</key>
+					<true />
+				</dict>
+			</array>
+		</array>
+	</dict>
+</plist>";
+			Assert.Equal(expected, actual);//"Parsing DataSet did not return the expected value.");
+
+
 		}
 	}
 }

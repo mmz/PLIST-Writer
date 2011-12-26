@@ -66,11 +66,11 @@ namespace EmitLib.AST.Nodes
 							methodInfo, invocationObject, arguments
 							);
 		}
-		public static AstCallMethodVoid CallVoid(MethodInfo methodInfo, IAstRefOrAddr invocationObject, params IAstStackItem[] arguments)
+		public static AstCallMethodVoid CallVoid(this MethodInfo methodInfo, IAstRefOrAddr invocationObject, params IAstStackItem[] arguments)
 		{
 			return CallVoidM(methodInfo, invocationObject, arguments.ToList());
 		}
-		public static AstCallMethodVoid CallVoid(MethodInfo methodInfo, LocalBuilder local, params IAstStackItem[] arguments)
+		public static AstCallMethodVoid CallVoid(this MethodInfo methodInfo, LocalBuilder local, params IAstStackItem[] arguments)
 		{
 			return CallVoidM(methodInfo, local.RoA(), arguments.ToList());
 		}
@@ -85,12 +85,12 @@ namespace EmitLib.AST.Nodes
 
 		public static AstCallMethodVoid CallVoid(this IAstRefOrAddr invocationObject, MethodInfo methodInfo, params IAstStackItem[] arguments)
 		{
-			return CallVoidM(methodInfo, invocationObject, arguments.ToList());
+			return CallVoidM(methodInfo, methodInfo.IsStatic ? null : invocationObject, arguments.ToList());
 		}
 		public static AstCallMethodVoid CallVoid(this IAstRefOrAddr invocationObject, string methodName, params IAstStackItem[] arguments)
 		{
 			var methodInfo = invocationObject.itemType.GetMethod(methodName, arguments.Select(i => i.itemType).ToArray());
-			return CallVoidM(methodInfo, invocationObject, arguments.ToList());
+			return CallVoidM(methodInfo, methodInfo.IsStatic ? null : invocationObject, arguments.ToList());
 		}
 		#endregion
 
