@@ -77,6 +77,7 @@ namespace Plist.Emit
 		{
 			var locObj = ilGen.DeclareLocal(_objectType);
 			yield return BuilderUtils.InitializeLocal(locObj, 2);
+
 			LocalBuilder locKey = null;
 			if (withKey)
 			{
@@ -107,7 +108,7 @@ namespace Plist.Emit
 				var tb = new List<IAstNode>
 				         	{
 									//Write key value
-				         		locWriter.RoA().CallVoid("WriteKey", Ast.Const(property.GetPlistName()))
+				         		locWriter.RoA().CallVoid("WriteKey", Ast.Const(property.GetPlistKey()))
 				         	};
 				
 
@@ -126,12 +127,12 @@ namespace Plist.Emit
 						);
 					#endregion
 				}
-				else if (typeof(IPlistWritable).IsAssignableFrom(property.PropertyType))
+				else if (typeof(IPlistSerializable).IsAssignableFrom(property.PropertyType))
 				{
 					tb.Add(
 						locObj.RoA()
 							.ReadPropRef(property)
-							.Cast(typeof(IPlistWritable))
+							.Cast(typeof(IPlistSerializable))
 							.CallVoid("Write", locWriter.RoA())
 						);
 				}
@@ -142,25 +143,11 @@ namespace Plist.Emit
 						? Nullable.GetUnderlyingType(property.PropertyType)
 						: property.PropertyType
 					);
-					if(testM != null)
-					{
-						var locPropVal = ilGen.DeclareLocal(typeof(object));
-						tb.Add(
-							new AstWriteLocal
-								{
-									localIndex = locPropVal.LocalIndex,
-									localType = locPropVal.LocalType,
-									value = locObj.RoA().ReadProp(property)
-								}
-							);
-						tb.Add(
-							Ast.This.CallVoid(testM, locWriter.RoA(), locPropVal.Ref())
-							);
-					}
-					else
-					{
-						tb.Add(locWriter.Ref().CallVoid("Write", locObj.RoA().ReadProp(property)));
-					}
+					tb.Add(
+						testM != null
+							? Ast.This.CallVoid(testM, locWriter.RoA(), locObj.RoA().ReadProp(property))
+							: locWriter.Ref().CallVoid("Write", locObj.RoA().ReadProp(property))
+						);
 				}
 
 				#region Check property value supression

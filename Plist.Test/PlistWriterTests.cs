@@ -97,7 +97,7 @@ namespace Plist.Test
 		[PlistIgnore]
 		public string[] UnusableDataToo { get; set; }
 
-		[PlistProperty("Name")]
+		[PlistKey("Name")]
 		public string FullName { get; set; }
 
 		public TestClass Person { get; set; }
@@ -157,10 +157,25 @@ namespace Plist.Test
 	}
 	#endregion
 
+	[Serializable]
+	public class ModelItem
+	{
+		[PlistKey("Id")]
+		public Guid PersonId { get; set; }
+
+		public string Name { get; set; }
+
+		public int Age { get; set; }
+
+		[PlistIgnore]
+		public string Password { get; set; }
+	}
+
 	static class TH
 	{
 		public static Stopwatch Run(this Action action, int loops, Action before, Action after)
 		{
+			
 			var sw = new Stopwatch();
 			for (var i = 0; i < loops; i++)
 			{
@@ -632,7 +647,7 @@ namespace Plist.Test
 </plist>";
 
 			var actual = value.ToPlistDocument();
-			//Plist.PlistDocument.CreateDocument(value);
+			
 
 			Assert.Equal(expected, actual);//, "Parsing String did not return the expected value.");
 		}
@@ -654,9 +669,30 @@ namespace Plist.Test
 </plist>";
 
 			var actual = value.ToPlistDocument();
-			//Plist.PlistDocument.CreateDocument(value);
-
+			
 			Assert.Equal(expected, actual);//, "Parsing String did not return the expected value.");
+			var val = new ModelItem
+								{
+									PersonId = new Guid("C48912B2-6F4D-4C80-90D7-D97E238A26AC"),
+									Name = "John Smith",
+									Age = 40,
+									Password = "Secret"
+								};
+			expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<!DOCTYPE plist PUBLIC ""-//Apple//DTD PLIST 1.0//EN"" ""http://www.apple.com/DTDs/PropertyList-1.0.dtd"">
+<plist version=""1.0"">
+	<dict>
+		<key>Id</key>
+		<string>c48912b2-6f4d-4c80-90d7-d97e238a26ac</string>
+		<key>Name</key>
+		<string>John Smith</string>
+		<key>Age</key>
+		<integer>40</integer>
+	</dict>
+</plist>";
+
+			var output = val.ToPlistDocument();
+			Assert.Equal(expected, output);
 		}
 
 		[Fact]
@@ -675,7 +711,7 @@ namespace Plist.Test
 </plist>";
 
 			var actual = value.ToPlistDocument();
-			//Plist.PlistDocument.CreateDocument(value);
+			
 
 			Assert.Equal(expected, actual);//, "Parsing String did not return the expected value.");
 		}

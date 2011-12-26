@@ -133,8 +133,8 @@ namespace Plist
 		private static TypeWriterBase CreateWriterInstance(Type objectType)
 		{
 
-			if (typeof(IPlistWritable).IsAssignableFrom(objectType))
-				return new ActionTypeWriter((writer, obj) => { if (obj != null)((IPlistWritable)obj).Write(writer); });
+			if (typeof(IPlistSerializable).IsAssignableFrom(objectType))
+				return new ActionTypeWriter((writer, obj) => { if (obj != null)((IPlistSerializable)obj).Write(writer); });
 
 			var plw = objectType.GetCustomAttributes(typeof(PlistValueWriterAttribute), true);
 			if (plw.Length > 0)
