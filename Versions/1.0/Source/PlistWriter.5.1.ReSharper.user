@@ -1,0 +1,679 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="livetemplates.csharp.usevar">True</setting>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstCallMethodVoid.cs" caret="647" fromTop="22" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:PlistCustomAttributes.cs" caret="935" fromTop="23" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:IPlistWritable.cs" caret="82" fromTop="4" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Helpers/f:CompilationHelper.cs" caret="818" fromTop="13" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstCallMethod.cs" caret="864" fromTop="21" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:Plist.cs" caret="277" fromTop="7" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:Utils/f:ReflectionUtils.cs" caret="641" fromTop="16" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="1121" fromTop="0" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstValueToAddr.cs" caret="75" fromTop="2" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewObject.cs" caret="143" fromTop="5" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstThrow.cs" caret="158" fromTop="7" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteProperty.cs" caret="133" fromTop="4" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadField.cs" caret="129" fromTop="4" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteLocal.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstIndirectRead.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadArgument.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteField.cs" caret="114" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReturn.cs" caret="251" fromTop="10" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadLocal.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewNullable.cs" caret="147" fromTop="7" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:Ast.cs" caret="3962" fromTop="22" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstConstantNull.cs" caret="153" fromTop="6" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Interfaces/f:IAstRefOrValue.cs" caret="152" fromTop="6" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:PlistWriter.cs" caret="2098" fromTop="19" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:TypeWriterBase.cs" caret="473" fromTop="19" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterStore.cs" caret="793" fromTop="19" />
+      <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="4026" fromTop="34" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="3125" fromTop="26" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="3125" fromTop="7" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="3125" fromTop="6" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="3100" fromTop="2" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="3125" fromTop="116" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/f:ObjectExtensions.cs" caret="1121" fromTop="16" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstValueToAddr.cs" caret="75" fromTop="2" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewObject.cs" caret="2453" fromTop="16" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewObject.cs" caret="1292" fromTop="15" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReturn.cs" caret="210" fromTop="10" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReturn.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewNullable.cs" caret="44" fromTop="1" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstIndirectRead.cs" caret="230" fromTop="10" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstNewObject.cs" caret="143" fromTop="5" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstThrow.cs" caret="158" fromTop="7" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteProperty.cs" caret="133" fromTop="4" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadField.cs" caret="129" fromTop="4" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteLocal.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstIndirectRead.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadArgument.cs" caret="103" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstWriteField.cs" caret="114" fromTop="3" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:EmitLib/d:AST/d:Nodes/f:AstReadLocal.cs" caret="103" fromTop="3" />
+      <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="1165" fromTop="21" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterStore.cs" caret="1450" fromTop="67" />
+      <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="6472" fromTop="15" />
+      <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="6472" fromTop="36" />
+      <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="3858" fromTop="4" />
+      <File id="44B47035-CE4D-424B-A750-F3640BD60372/f:PlistWriterTests.cs" caret="20277" fromTop="26" />
+      <File id="A0CA3CCB-A4D8-46AB-8026-EB74539AAB21/d:Emit/f:WriterStore.cs" caret="793" fromTop="19" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>C:\Program Files (x86)\NUnit 2.5.6\bin\net-2.0\</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Qualified:Plist.IPlistWritable">
+      <Item value="Write`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Default">
+      <Item value="using" priority="0" />
+      <Item value="internal" priority="7" />
+      <Item value="xt" priority="0" />
+      <Item value="sw" priority="7" />
+      <Item value="Assert`0" priority="1" />
+      <Item value="if" priority="71" />
+      <Item value="pValue" priority="0" />
+      <Item value="null" priority="51" />
+      <Item value="continue" priority="1" />
+      <Item value="var" priority="49" />
+      <Item value="objectType" priority="31" />
+      <Item value="value" priority="46" />
+      <Item value="else" priority="15" />
+      <Item value="typeof" priority="34" />
+      <Item value="byte" priority="5" />
+      <Item value="WriteArray`0" priority="1" />
+      <Item value="key" priority="9" />
+      <Item value="return" priority="78" />
+      <Item value="TValue`0" priority="0" />
+      <Item value="pair" priority="0" />
+      <Item value="public" priority="59" />
+      <Item value="virtual" priority="5" />
+      <Item value="void" priority="20" />
+      <Item value="_writer" priority="2" />
+      <Item value="data" priority="7" />
+      <Item value="IEnumerable`0" priority="1" />
+      <Item value="plw" priority="3" />
+      <Item value="Length" priority="4" />
+      <Item value="this" priority="12" />
+      <Item value="string" priority="24" />
+      <Item value="switch" priority="0" />
+      <Item value="case" priority="0" />
+      <Item value="double" priority="0" />
+      <Item value="Int16`0" priority="0" />
+      <Item value="Int32`0" priority="1" />
+      <Item value="DateTime`0" priority="10" />
+      <Item value="Char`0" priority="0" />
+      <Item value="WriteString`0" priority="0" />
+      <Item value="protected" priority="13" />
+      <Item value="bool" priority="8" />
+      <Item value="WriteDate`0" priority="0" />
+      <Item value="false" priority="7" />
+      <Item value="long" priority="0" />
+      <Item value="overall" priority="1" />
+      <Item value="property" priority="13" />
+      <Item value="true" priority="9" />
+      <Item value="DisplayName" priority="1" />
+      <Item value="Xunit" priority="0" />
+      <Item value="abstract" priority="3" />
+      <Item value="class" priority="11" />
+      <Item value="static" priority="35" />
+      <Item value="DefineType`0" priority="0" />
+      <Item value="PlistWriter`0" priority="5" />
+      <Item value="private" priority="16" />
+      <Item value="HashSet" priority="0" />
+      <Item value="SortedList" priority="0" />
+      <Item value="Type`0" priority="17" />
+      <Item value="override" priority="3" />
+      <Item value="new" priority="44" />
+      <Item value="SortedList&lt;Type,TypeWriterBaseImpl&gt;" priority="0" />
+      <Item value="_writers" priority="2" />
+      <Item value="typeWriter" priority="3" />
+      <Item value="readonly" priority="9" />
+      <Item value="MethodAttributes`0" priority="1" />
+      <Item value="WriteImpl`0" priority="0" />
+      <Item value="writer" priority="15" />
+      <Item value="obj" priority="24" />
+      <Item value="_objectType" priority="4" />
+      <Item value="ILGenerator`0" priority="2" />
+      <Item value="mapperAst" priority="0" />
+      <Item value="writerAst" priority="7" />
+      <Item value="AstIfNull`0" priority="0" />
+      <Item value="AstReturnVoid`0" priority="0" />
+      <Item value="condition" priority="3" />
+      <Item value="trueBranch" priority="3" />
+      <Item value="nodes" priority="4" />
+      <Item value="List&lt;IAstNode&gt;" priority="0" />
+      <Item value="AstCallMethodVoid`0" priority="0" />
+      <Item value="ExperimentalPlistWriter`0" priority="0" />
+      <Item value="AstReadThis`0" priority="1" />
+      <Item value="List&lt;IAstStackItem&gt;" priority="0" />
+      <Item value="NonPublic" priority="1" />
+      <Item value="BindingFlags`0" priority="8" />
+      <Item value="foreach" priority="4" />
+      <Item value="AstExprNot`0" priority="0" />
+      <Item value="AstConstantString`0" priority="0" />
+      <Item value="str" priority="1" />
+      <Item value="Type" priority="0" />
+      <Item value="testM" priority="2" />
+      <Item value="sourceObject" priority="2" />
+      <Item value="BuilderUtils`0" priority="1" />
+      <Item value="locObj" priority="13" />
+      <Item value="propertyInfo" priority="0" />
+      <Item value="object" priority="20" />
+      <Item value="String`0" priority="0" />
+      <Item value="AstCallMethodVoid" priority="0" />
+      <Item value="methodInfo" priority="2" />
+      <Item value="invocationObject" priority="2" />
+      <Item value="arguments" priority="3" />
+      <Item value="CallVoid`0" priority="0" />
+      <Item value="Where`1" priority="0" />
+      <Item value="m" priority="6" />
+      <Item value="methodName" priority="1" />
+      <Item value="FirstOrDefault`1" priority="0" />
+      <Item value="Ast`0" priority="35" />
+      <Item value="i" priority="2" />
+      <Item value="Array`0" priority="0" />
+      <Item value="params" priority="2" />
+      <Item value="ToList`1" priority="1" />
+      <Item value="AstConstantString" priority="0" />
+      <Item value="tb" priority="3" />
+      <Item value="local" priority="0" />
+      <Item value="AstReturnVoid" priority="0" />
+      <Item value="AstExprIsNull" priority="0" />
+      <Item value="AstIf" priority="0" />
+      <Item value="falseBranch" priority="1" />
+      <Item value="If`0" priority="0" />
+      <Item value="ctor" priority="3" />
+      <Item value="Nodes" priority="0" />
+      <Item value="astNodes" priority="0" />
+      <Item value="AstComplexNode" priority="0" />
+      <Item value="AstExprNot" priority="0" />
+      <Item value="IFormatProvider`0" priority="2" />
+      <Item value="NotFiniteNumberException`0" priority="0" />
+      <Item value="Not`0" priority="0" />
+      <Item value="IsNull`0" priority="0" />
+      <Item value="int" priority="5" />
+      <Item value="Enum`0" priority="0" />
+      <Item value="ReflectionUtils`0" priority="0" />
+      <Item value="AstCastclass" priority="0" />
+      <Item value="targetType" priority="0" />
+      <Item value="actualPropType" priority="5" />
+      <Item value="Nullable`0" priority="0" />
+      <Item value="NInt" priority="0" />
+      <Item value="AstBuildHelper`0" priority="0" />
+      <Item value="IAstRef`0" priority="1" />
+      <Item value="refObj" priority="0" />
+      <Item value="astRef" priority="1" />
+      <Item value="unboxedType" priority="1" />
+      <Item value="AstBox`0" priority="0" />
+      <Item value="IAstRefOrValue`0" priority="1" />
+      <Item value="_value" priority="0" />
+      <Item value="isNullable" priority="1" />
+      <Item value="AstWriteLocal`0" priority="0" />
+      <Item value="IAstStackItem`0" priority="0" />
+      <Item value="val" priority="3" />
+      <Item value="AstReadLocal`0" priority="0" />
+      <Item value="localType" priority="0" />
+      <Item value="localIndex" priority="0" />
+      <Item value="tempLoc" priority="1" />
+      <Item value="runS" priority="0" />
+      <Item value="runF" priority="0" />
+      <Item value="prepare" priority="0" />
+      <Item value="const" priority="0" />
+      <Item value="Guid`0" priority="1" />
+      <Item value="List" priority="0" />
+      <Item value="_typeBuilder" priority="0" />
+      <Item value="Standard" priority="0" />
+      <Item value="compilationContext" priority="0" />
+      <Item value="OpCode`0" priority="0" />
+      <Item value="_constructorParam" priority="2" />
+      <Item value="List&lt;object&gt;" priority="0" />
+      <Item value="buider" priority="0" />
+      <Item value="FieldInfo`0" priority="1" />
+      <Item value="_soFld" priority="2" />
+      <Item value="AstReadField" priority="0" />
+      <Item value="fieldInfo" priority="0" />
+      <Item value="field" priority="0" />
+      <Item value="get" priority="6" />
+      <Item value="AstReadThis" priority="0" />
+      <Item value="AstReadArrayItem" priority="0" />
+      <Item value="array" priority="1" />
+      <Item value="index" priority="2" />
+      <Item value="idx" priority="2" />
+      <Item value="PlistValueWriterAttribute`0" priority="0" />
+      <Item value="Obsolete" priority="0" />
+      <Item value="locWriter" priority="7" />
+      <Item value="IPlistWritable`0" priority="1" />
+      <Item value="IDictionary`0" priority="2" />
+      <Item value="AstTypeof" priority="0" />
+      <Item value="itemType" priority="2" />
+      <Item value="message" priority="0" />
+      <Item value="AstConstantNull`0" priority="0" />
+      <Item value="enum" priority="1" />
+      <Item value="default" priority="0" />
+      <Item value="set" priority="3" />
+      <Item value="Func" priority="1" />
+      <Item value="result" priority="2" />
+      <Item value="createWriter" priority="2" />
+      <Item value="WriterStore`0" priority="1" />
+      <Item value="IComparer" priority="0" />
+      <Item value="TypeComparer`0" priority="0" />
+      <Item value="CacheLock" priority="1" />
+      <Item value="try" priority="0" />
+      <Item value="finally" priority="0" />
+      <Item value="x" priority="1" />
+      <Item value="xh" priority="1" />
+      <Item value="yh" priority="1" />
+      <Item value="y" priority="0" />
+      <Item value="WriteDictionary`0" priority="0" />
+      <Item value="stream" priority="2" />
+      <Item value="helper`0" priority="0" />
+      <Item value="Stopwatch`0" priority="1" />
+      <Item value="Action`0" priority="2" />
+      <Item value="for" priority="0" />
+      <Item value="loops" priority="0" />
+      <Item value="before" priority="1" />
+      <Item value="action" priority="1" />
+      <Item value="after" priority="1" />
+      <Item value="TH`0" priority="0" />
+      <Item value="iterations" priority="0" />
+      <Item value="dict" priority="0" />
+      <Item value="AstReadArgument" priority="0" />
+      <Item value="argumentIndex" priority="0" />
+      <Item value="IAstNode`0" priority="1" />
+      <Item value="gIsNullable" priority="0" />
+      <Item value="WriteArrayStartElement`0" priority="0" />
+      <Item value="WriteEndElement`0" priority="1" />
+      <Item value="table" priority="0" />
+      <Item value="Action" priority="1" />
+      <Item value="row" priority="2" />
+      <Item value="column" priority="5" />
+      <Item value="Expression`0" priority="0" />
+      <Item value="sbyte" priority="0" />
+      <Item value="SByte`0" priority="0" />
+      <Item value="TimeSpan`0" priority="0" />
+      <Item value="IEnumerable" priority="4" />
+      <Item value="WriteDictionaryStartElement`0" priority="0" />
+      <Item value="ms" priority="0" />
+      <Item value="Write`0" priority="0" />
+      <Item value="DataSet`0" priority="0" />
+      <Item value="let" priority="0" />
+      <Item value="T`0" priority="1" />
+      <Item value="in" priority="1" />
+      <Item value="WriteKeyValuePair`2" priority="0" />
+      <Item value="kvp" priority="0" />
+      <Item value="Public" priority="0" />
+      <Item value="TypeWriterBaseImpl`0" priority="4" />
+      <Item value="as" priority="2" />
+      <Item value="CultureInfo`0" priority="0" />
+      <Item value="_write" priority="1" />
+      <Item value="ActionTypeWriter`0" priority="6" />
+      <Item value="ActionTypeWriter" priority="0" />
+      <Item value="Plist" priority="0" />
+      <Item value="CreateTypeWriter`0" priority="0" />
+      <Item value="CreateTypeWriterImpl`0" priority="0" />
+      <Item value="actualType" priority="2" />
+      <Item value="Byte`0" priority="0" />
+      <Item value="Etype" priority="1" />
+      <Item value="CreateValueTypeWriteMethod`0" priority="0" />
+      <Item value="elementType" priority="0" />
+      <Item value="twr" priority="0" />
+      <Item value="tWriter" priority="0" />
+      <Item value="CreateTypedEnumerableWriter`0" priority="0" />
+      <Item value="eType" priority="0" />
+      <Item value="ConstructWriter`0" priority="0" />
+      <Item value="IDictionary" priority="0" />
+      <Item value="vWriter" priority="0" />
+      <Item value="dictionaryEnumerator" priority="1" />
+      <Item value="_actualType" priority="1" />
+      <Item value="mi" priority="3" />
+      <Item value="yield return" priority="7" />
+      <Item value="mc" priority="2" />
+      <Item value="argumentType" priority="0" />
+      <Item value="Serializable" priority="2" />
+      <Item value="Lazy" priority="0" />
+      <Item value="Lazy&lt;TypeWriterBaseImpl&gt;" priority="1" />
+      <Item value="_valueWriter" priority="0" />
+      <Item value="PublicationOnly" priority="0" />
+      <Item value="Skip" priority="1" />
+      <Item value="_valueWriterCreator" priority="1" />
+      <Item value="_itemType" priority="0" />
+      <Item value="keyType" priority="0" />
+      <Item value="valueType" priority="0" />
+      <Item value="is" priority="1" />
+      <Item value="Year" priority="0" />
+      <Item value="DateTime" priority="0" />
+      <Item value="PlistIgnore" priority="0" />
+      <Item value="IgnoreMe" priority="0" />
+      <Item value="AttributesTestClass`0" priority="0" />
+      <Item value="Obj" priority="0" />
+      <Item value="nInt" priority="0" />
+      <Item value="localBuilder" priority="5" />
+      <Item value="LocalVariableInfo`0" priority="0" />
+      <Item value="generator" priority="0" />
+      <Item value="context" priority="0" />
+      <Item value="ilGen" priority="1" />
+      <Item value="System" priority="0" />
+      <Item value="Diagnostics" priority="0" />
+      <Item value="Trace`0" priority="0" />
+      <Item value="LocalBuilder`0" priority="2" />
+      <Item value="type" priority="1" />
+      <Item value="withKey" priority="1" />
+      <Item value="WriteValue`0" priority="0" />
+      <Item value="XWriter" priority="0" />
+      <Item value="WriteKey`0" priority="0" />
+      <Item value="DtdProcessing`0" priority="0" />
+      <Item value="isDate" priority="1" />
+      <Item value="out" priority="0" />
+      <Item value="WriteRealImpl`0" priority="0" />
+      <Item value="xmlWriter" priority="3" />
+      <Item value="XmlWriter`0" priority="1" />
+      <Item value="TypeWriterBase`0" priority="4" />
+      <Item value="temp" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Diagnostics.Stopwatch">
+      <Item value="ElapsedMilliseconds" priority="2" />
+      <Item value="Reset`0" priority="0" />
+      <Item value="Start`0" priority="0" />
+      <Item value="Stop`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Xunit.Assert">
+      <Item value="InRange`1" priority="0" />
+      <Item value="Equal`1" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Type">
+      <Item value="IsValueType" priority="6" />
+      <Item value="IsArray" priority="1" />
+      <Item value="BaseType" priority="0" />
+      <Item value="IsPrimitive" priority="0" />
+      <Item value="HasElementType" priority="1" />
+      <Item value="GetElementType`0" priority="1" />
+      <Item value="FullName" priority="3" />
+      <Item value="IsSerializable" priority="0" />
+      <Item value="GetMethod`0" priority="5" />
+      <Item value="GetProperties`0" priority="0" />
+      <Item value="GetMethods`0" priority="0" />
+      <Item value="GetProperty`0" priority="1" />
+      <Item value="GetField`0" priority="0" />
+      <Item value="IsAssignableFrom`0" priority="2" />
+      <Item value="GetHashCode`0" priority="3" />
+      <Item value="GetCustomAttributes`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.PlistNames">
+      <Item value="DataValueTag" priority="0" />
+      <Item value="DictValueTag" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Convert">
+      <Item value="ToBase64String`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Plist.PlistWriterAttribute">
+      <Item value="WriteValue`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.SortedList`2">
+      <Item value="ContainsKey`0" priority="0" />
+      <Item value="Add`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstComplexNode">
+      <Item value="nodes" priority="6" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="Add`0" priority="10" />
+      <Item value="AddRange`0" priority="0" />
+      <Item value="Select`2" priority="0" />
+      <Item value="ToArray`0" priority="0" />
+      <Item value="Count" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Xml.XmlWriter">
+      <Item value="WriteStartElement`0" priority="0" />
+      <Item value="WriteEndElement`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Reflection.BindingFlags">
+      <Item value="NonPublic" priority="1" />
+      <Item value="Instance" priority="5" />
+      <Item value="Public" priority="1" />
+      <Item value="PutRefDispProperty" priority="0" />
+      <Item value="Static" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.PropertyInfo">
+      <Item value="PropertyType" priority="5" />
+      <Item value="GetGetMethod`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@EmitLib.AST.Helpers.AstBuildHelper">
+      <Item value="ReadLocalRV`0" priority="1" />
+      <Item value="CastClass`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Interfaces.IAstRefOrAddr">
+      <Item value="itemType" priority="0" />
+      <Item value="ReadProp`0" priority="3" />
+      <Item value="ReadPropVal`0" priority="0" />
+      <Item value="ReadPropRef`0" priority="1" />
+      <Item value="CallVoid`0" priority="2" />
+      <Item value="Call`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.MethodInfo">
+      <Item value="Name" priority="0" />
+      <Item value="ReturnType" priority="0" />
+      <Item value="IsPublic" priority="0" />
+      <Item value="IsStatic" priority="1" />
+      <Item value="GetParameters`0" priority="0" />
+      <Item value="Invoke`0" priority="1" />
+      <Item value="MakeGenericMethod`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@EmitLib.AST.Nodes.Ast">
+      <Item value="CallVoid`0" priority="3" />
+      <Item value="Const`0" priority="1" />
+      <Item value="ReadProp`0" priority="2" />
+      <Item value="RetVoid" priority="4" />
+      <Item value="Complex`0" priority="5" />
+      <Item value="If`0" priority="1" />
+      <Item value="IsNull`0" priority="0" />
+      <Item value="Not`0" priority="0" />
+      <Item value="NotNull`0" priority="0" />
+      <Item value="Cast`0" priority="2" />
+      <Item value="PropRef`0" priority="2" />
+      <Item value="PropVal`0" priority="6" />
+      <Item value="Unbox`0" priority="0" />
+      <Item value="Box`0" priority="0" />
+      <Item value="Field`0" priority="0" />
+      <Item value="This" priority="2" />
+      <Item value="TypeOf`0" priority="0" />
+      <Item value="Arg`0" priority="2" />
+      <Item value="Null" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Interfaces.IAstStackItem">
+      <Item value="itemType" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.IEnumerable`1">
+      <Item value="ToArray`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Array">
+      <Item value="CreateInstance`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.ParameterInfo">
+      <Item value="ParameterType" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.Emit.LocalBuilder">
+      <Item value="LocalType" priority="1" />
+      <Item value="LocalIndex" priority="3" />
+      <Item value="RoA`0" priority="13" />
+      <Item value="Ref`0" priority="6" />
+      <Item value="RoV`0" priority="7" />
+      <Item value="Val`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Plist.Test.TestClass">
+      <Item value="ToPlistDocumentFaster`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Enum">
+      <Item value="GetType`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Interfaces.IAstRefOrValue">
+      <Item value="itemType" priority="0" />
+      <Item value="IsNull`0" priority="0" />
+      <Item value="Compile`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Guid">
+      <Item value="NewGuid`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.Emit.TypeBuilder">
+      <Item value="DefineConstructor`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Reflection.MethodAttributes">
+      <Item value="Public" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.CompilationContext">
+      <Item value="Emit`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Reflection.Emit.OpCodes">
+      <Item value="Ret" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Plist.Emit.WriterBuilder">
+      <Item value="CreateInstance`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstReadThis">
+      <Item value="FieldRef`0" priority="0" />
+      <Item value="CallVoid`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstReadFieldRef">
+      <Item value="ReadItem`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstCastclassRef">
+      <Item value="CallVoid`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstReadPropertyValue">
+      <Item value="BoxUnbox`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstReadPropertyRef">
+      <Item value="NotNull`0" priority="0" />
+      <Item value="Cast`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Interfaces.IAstRef">
+      <Item value="Cast`0" priority="0" />
+      <Item value="CallVoid`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.IO.TextWriter">
+      <Item value="WriteLine`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.WriterStore">
+      <Item value="GetWriter`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Threading.ReaderWriterLockSlim">
+      <Item value="EnterReadLock`0" priority="0" />
+      <Item value="ExitReadLock`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="CompareOrdinal`0" priority="0" />
+      <Item value="IsNullOrEmpty`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.IO.MemoryStream">
+      <Item value="Position" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.Test.TH">
+      <Item value="Run`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="GetType`0" priority="6" />
+      <Item value="ToString`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstReadArgumentRef">
+      <Item value="Call`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataTable">
+      <Item value="Columns" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataColumn">
+      <Item value="DataType" priority="0" />
+      <Item value="Ordinal" priority="1" />
+      <Item value="ColumnName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Linq.Expressions.Expression">
+      <Item value="Call`0" priority="0" />
+      <Item value="IfThen`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Plist.PlistWriter">
+      <Item value="GetType`0" priority="0" />
+      <Item value="XWriter" priority="0" />
+      <Item value="WriteArrayStartElement`0" priority="0" />
+      <Item value="WriteEndElement`0" priority="0" />
+      <Item value="WriteDictionaryStartElement`0" priority="0" />
+      <Item value="WriteKey`0" priority="1" />
+      <Item value="XmlWriter" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Globalization.CultureInfo">
+      <Item value="InvariantCulture" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.Plist">
+      <Item value="RealValueTag" priority="0" />
+      <Item value="DateValueTag" priority="0" />
+      <Item value="DateFormat" priority="0" />
+      <Item value="DictValueTag" priority="0" />
+      <Item value="IntValueTag" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.ActionTypeWriter">
+      <Item value="NInt" priority="0" />
+      <Item value="Int" priority="0" />
+      <Item value="NReal" priority="0" />
+      <Item value="Real" priority="0" />
+      <Item value="NBool" priority="0" />
+      <Item value="Bool" priority="0" />
+      <Item value="String" priority="0" />
+      <Item value="Date" priority="1" />
+      <Item value="NEnum`0" priority="0" />
+      <Item value="Enum`0" priority="0" />
+      <Item value="Data" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Plist.TypeWriterBaseImpl">
+      <Item value="Write`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.IDictionaryEnumerator">
+      <Item value="Value" priority="0" />
+      <Item value="Key" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.TypeWriterBaseImpl">
+      <Item value="GetMethodInfo`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Lazy`1">
+      <Item value="Value" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.DateTime">
+      <Item value="ToString`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.Emit.ILGenerator">
+      <Item value="EmitWriteLine`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Diagnostics.Trace">
+      <Item value="WriteLine`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.DateTime">
+      <Item value="TryParse`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Plist.TypeWriterBase">
+      <Item value="WriteDate`0" priority="0" />
+      <Item value="WriteData`0" priority="0" />
+      <Item value="WriteBool`0" priority="0" />
+      <Item value="WriteString`0" priority="0" />
+      <Item value="WriteReal`0" priority="0" />
+      <Item value="WriteInt`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EmitLib.AST.Nodes.AstCallMethodVoid">
+      <Item value="Compile`0" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
