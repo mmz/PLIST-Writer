@@ -12,7 +12,7 @@
     <AssemblyName>Plist.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>%24/PlistWriter/Source/Plist.Test</SccProjectName>
+    <SccProjectName>%24/PlistWriter/Versions/1.0/Source/Plist.Test</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs33</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
@@ -42,22 +42,28 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\References\xUnit\xunit.dll</HintPath>
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\References\xUnit\xunit.extensions.dll</HintPath>
+    <Reference Include="xunit.extensions, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PlistWriterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Temp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plist\Plist.csproj">
       <Project>{A0CA3CCB-A4D8-46AB-8026-EB74539AAB21}</Project>
       <Name>Plist</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

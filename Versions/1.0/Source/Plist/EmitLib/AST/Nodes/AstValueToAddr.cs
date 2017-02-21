@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Emit;
+using EmitLib.AST.Helpers;
 using EmitLib.AST.Interfaces;
 
 namespace EmitLib.AST.Nodes
