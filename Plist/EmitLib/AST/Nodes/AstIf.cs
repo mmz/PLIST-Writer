@@ -5,34 +5,63 @@ namespace EmitLib.AST.Nodes
 {
 	class AstIf : IAstNode
 	{
-		public IAstValue condition;
-		public AstComplexNode trueBranch;
-		public AstComplexNode falseBranch;
+		public IAstRefOrValue condition;
+		public IAstNode trueBranch;
+		public IAstNode falseBranch;
 
 		#region IAstNode Members
 
-		public void Compile(CompilationContext context)
+		public virtual void Compile(CompilationContext context)
+		{
+			condition.Compile(context);
+			if (falseBranch == null)
+				CompileIfNoElse(context);
+			else if (trueBranch == null)
+				CompileElseNoIf(context);
+			else
+				CompileIfAndElse(context);
+		}
+
+		protected void CompileIfAndElse(CompilationContext context)
 		{
 			Label elseLabel = context.ilGenerator.DefineLabel();
 			Label endIfLabel = context.ilGenerator.DefineLabel();
 
-			condition.Compile(context);
+			//if(
 			context.Emit(OpCodes.Brfalse, elseLabel);
-
-			if (trueBranch != null)
-			{
-				trueBranch.Compile(context);
-			}
-			if (falseBranch != null)
-			{
-				context.Emit(OpCodes.Br, endIfLabel);
-			}
-
+			//){
+			trueBranch.Compile(context);
+			//}
+			context.Emit(OpCodes.Br, endIfLabel);
+			//else
 			context.ilGenerator.MarkLabel(elseLabel);
-			if (falseBranch != null)
-			{
-				falseBranch.Compile(context);
-			}
+			//{
+			falseBranch.Compile(context);
+			//}
+			context.ilGenerator.MarkLabel(endIfLabel);
+		}
+
+		protected void CompileIfNoElse(CompilationContext context)
+		{
+			Label endIfLabel = context.ilGenerator.DefineLabel();
+
+			//if(
+			context.Emit(OpCodes.Brfalse, endIfLabel);
+			//){
+			trueBranch.Compile(context);
+			//}
+			context.ilGenerator.MarkLabel(endIfLabel);
+		}
+
+		protected void CompileElseNoIf(CompilationContext context)
+		{
+			Label endIfLabel = context.ilGenerator.DefineLabel();
+
+			//if(!
+			context.Emit(OpCodes.Brtrue, endIfLabel);
+			//){
+			falseBranch.Compile(context);
+			//}
 			context.ilGenerator.MarkLabel(endIfLabel);
 		}
 
