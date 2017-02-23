@@ -150,7 +150,7 @@ namespace Plist.Emit
 
 
 				#region Check property value supression
-				
+
 				if (!property.PropertyType.IsValueType)
 					yield return
 						Ast.If(
@@ -178,12 +178,11 @@ namespace Plist.Emit
 			yield return BuilderUtils.InitializeLocal(locObj, 2);
 
 			var mc = Ast.Complex();
+
+			//Write key if necessary
 			if (withKey)
-			{
-				var locKey = ilGen.DeclareLocal(typeof(string));
-				yield return BuilderUtils.InitializeLocal(locKey, 3);
-				mc.nodes.Add(writerRef.CallVoid("WriteKey", locKey.Ref()));
-			}
+				mc.nodes.Add(writerRef.CallVoid("WriteKey", Ast.ArgR(3, typeof(string))));
+
 			mc.nodes.Add(
 				Ast.This.CallVoid(mi, writerRef, locObj.Ref())
 				);
