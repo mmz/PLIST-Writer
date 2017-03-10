@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,68 +47,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmitLib\AST\Helpers\AstBuildHelper.cs" />
-    <Compile Include="EmitLib\AST\Helpers\CompilationHelper.cs" />
-    <Compile Include="EmitLib\AST\ILCompilationException.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstAddr.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstNode.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstRef.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstRefOrAddr.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstRefOrValue.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstStackItem.cs" />
-    <Compile Include="EmitLib\AST\Interfaces\IAstValue.cs" />
-    <Compile Include="EmitLib\AST\Nodes\Ast.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstBox.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstCallMethod.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstCallMethodVoid.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstCastClass.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstComplexNode.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstConstantInt32.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstConstantNull.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstConstantString.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstExceptionHandlingBlock.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstExprEquals.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstExprIsNull.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstExprNot.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstIf.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstIfNull.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstIfTernar.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstIndirectRead.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstInitializeLocalVariable.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstNewNullable.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstNewObject.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReadArgument.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReadArrayItem.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReadField.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReadLocal.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReadProperty.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReadThis.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReturn.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstReturnVoid.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstThrow.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstTypeof.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstUnbox.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstValueToAddr.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstWriteField.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstWriteLocal.cs" />
-    <Compile Include="EmitLib\AST\Nodes\AstWriteProperty.cs" />
-    <Compile Include="EmitLib\AST\CompilationContext.cs" />
-    <Compile Include="EmitLib\EmitLibException.cs" />
-    <Compile Include="EmitLib\Utils\MiscUtils.cs" />
-    <Compile Include="EmitLib\Utils\ReflectionUtils.cs" />
-    <Compile Include="EmitLib\BuilderUtils.cs" />
+    <Compile Include="PlistWriterExtensions.cs" />
+    <Compile Include="Writers\ActionTypeWriter.cs" />
+    <Compile Include="Writers\DataRowWriter.cs" />
+    <Compile Include="Writers\DataSetWriter.cs" />
+    <Compile Include="Writers\DataTableWriter.cs" />
+    <Compile Include="Writers\DictionaryWriter.cs" />
     <Compile Include="Emit\DynamicAssemblyManager.cs" />
+    <Compile Include="Writers\EnumerableWriter.cs" />
     <Compile Include="Emit\TypeWriterBuilder.cs" />
-    <Compile Include="Emit\WriterStore.cs" />
+    <Compile Include="Writers\WriterStore.cs" />
     <Compile Include="IPlistSerializable.cs" />
     <Compile Include="PlistWriter.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Plist.cs" />
     <Compile Include="PlistCustomAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyInfoExtension.cs" />
+    <Compile Include="PropertyInfoExtensions.cs" />
     <Compile Include="StringWriterWithEncoding.cs" />
-    <Compile Include="Emit\TypeWriterBase.cs" />
+    <Compile Include="Writers\TypeWriterBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmitHelper\EmitHelper.csproj">
+      <Project>{64628009-76c7-42b0-9370-24ef9c8adfe6}</Project>
+      <Name>EmitHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

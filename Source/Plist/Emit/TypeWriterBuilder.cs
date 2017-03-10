@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using EmitLib;
-using EmitLib.AST;
-using EmitLib.AST.Interfaces;
-using EmitLib.AST.Nodes;
-using EmitLib.Utils;
+using EmitHelper;
+using EmitHelper.Ast;
+using EmitHelper.Ast.Interfaces;
+using EmitHelper.Ast.Nodes;
+using EmitHelper.Extensions;
+using Plist.Writers;
 
 namespace Plist.Emit
 {
@@ -18,7 +20,6 @@ namespace Plist.Emit
 		private readonly FieldInfo _soFld;
 		private readonly FieldInfo _tFld;
 		private List<object> _constructorParam;
-		private readonly bool _isNullable;
 		private readonly Type _actualType;
 
 		public TypeWriterBuilder(Type objectType, TypeBuilder typeBuilder)
@@ -27,9 +28,9 @@ namespace Plist.Emit
 			_typeBuilder = typeBuilder;
 			_tFld = typeof(TypeWriterBase).GetField("ObjectType", BindingFlags.NonPublic | BindingFlags.Instance);
 			_soFld = typeof(TypeWriterBase).GetField("SupliedObjects", BindingFlags.NonPublic | BindingFlags.Instance);
-			_isNullable = ReflectionUtils.IsNullable(_objectType);
+			var isNullable = _objectType.IsNullable();
 			_actualType =
-						_isNullable
+						isNullable
 							? Nullable.GetUnderlyingType(_objectType)
 							: _objectType;
 
@@ -57,152 +58,125 @@ namespace Plist.Emit
 				);
 
 			var ilGen = methodBuilder.GetILGenerator();
-			var locWriter = ilGen.DeclareLocal(typeof(PlistWriter));
+			var compilationContext = new CompilationContext(ilGen);
 
 			var writerAst = new AstComplexNode();
 
-			writerAst.nodes.Add(BuilderUtils.InitializeLocal(locWriter, 1));
-
-			var mi = TypeWriterBase.GetMethodInfo(_actualType);
+			var mi = GetBoxedMethodInfo(_actualType);
 			writerAst.nodes.AddRange(mi != null
-												? BuildWriterWithMethod(ilGen, mi, locWriter, withKey)
-												: BuildWriteImplMethodForClass(ilGen, locWriter, withKey));
-
-
-			var compilationContext = new CompilationContext(ilGen);
+												? BuildWriterWithMethod(mi, withKey)
+												: BuildWriteImplMethodForClass(compilationContext, withKey));
 			writerAst.Compile(compilationContext);
 		}
 
-		private IEnumerable<IAstNode> BuildWriteImplMethodForClass(ILGenerator ilGen, LocalBuilder locWriter, bool withKey)
+		private IEnumerable<IAstNode> BuildWriterWithMethod(MethodInfo mi, bool withKey)
 		{
-			var locObj = ilGen.DeclareLocal(_objectType);
-			yield return BuilderUtils.InitializeLocal(locObj, 2);
-
-			LocalBuilder locKey = null;
+			var writerRef = Ast.ArgRef(1, typeof(PlistWriter));
 			if (withKey)
-			{
-				locKey = ilGen.DeclareLocal(typeof(string));
-				yield return BuilderUtils.InitializeLocal(locKey, 3);
-			}
+				yield return writerRef.CallVoid("WriteKey", Ast.ArgRef(3, typeof(string)));
+			yield return mi.CallVoid(writerRef, Ast.Arg(2, typeof(object)));
 
-			//If value is null then return
-			if (!_objectType.IsValueType)
-				yield return Ast.If(locObj.RoV().IsNull(), Ast.Complex(Ast.RetVoid));
+			yield return Ast.RetVoid;
+		}
 
+		private IEnumerable<IAstNode> BuildWriteImplMethodForClass(ICompilationContext compilationContext, bool withKey)
+		{
+			var writerRef = Ast.ArgRef(1, typeof(PlistWriter));
+			var objArg = Ast.ArgRefOrAddr(2, _objectType);
 
 			if (withKey)
-				yield return locWriter.Ref().CallVoid("WriteKey", locKey.Ref());
+				yield return writerRef.CallVoid("WriteKey", Ast.ArgRef(3, typeof(string)));
 
 			//Write opening dict element
-			yield return Ast.CallVoid("WriteDictionaryStartElement", locWriter);
+			yield return writerRef.CallVoid("WriteDictionaryStartElement");
 
+			//
 			//iterate through properties
-			foreach (var property in _objectType.GetProperties())
+			foreach (var property in _objectType.GetProperties().Where(p => !p.PlistIgnore()))
 			{
-				//Ignored properties
-				if (property.GetCustomAttributes(typeof(PlistIgnoreAttribute), false).Length > 0)
-					continue;
+				LocalBuilder localP = null;
+				var isPropNullable = property.IsNullable();
 
-				var isPropNullable = ReflectionUtils.IsNullable(property.PropertyType);
+				if (!property.PropertyType.IsValueType || isPropNullable)
+				{
+					localP = compilationContext.DeclareLocal(property.PropertyType);
+					yield return localP.Init();
+					yield return localP.Write(objArg.ReadProp(property));
+				}
+
 
 				var tb = new List<IAstNode>
-				         	{
-									//Write key value
-				         		locWriter.RoA().CallVoid("WriteKey", Ast.Const(property.GetPlistKey()))
-				         	};
-				
+				{//Write key value
+					writerRef.CallVoid("WriteKey", Ast.Const(property.GetPlistKey()))
+				};
 
-				var plw = property.GetCustomAttributes(typeof(PlistValueWriterAttribute), true);
-				if (plw.Length > 0)
+
+				var plw = property.GetPlistPropertyWriter();
+				if (plw != null)
+				#region Use custom writer from attribute //Use value writer from the property attribute
 				{
-					#region Use custom writer from attribute
 					var idx = _constructorParam.Count;
-					_constructorParam.Add(plw[0]);
+					_constructorParam.Add(plw);
 					tb.Add(
 						Ast.This
 							.FieldRef(_soFld)
 							.ReadItemRef(idx)
 							.Cast(typeof(PlistValueWriterAttribute))
-							.CallVoid("WriteValue", locWriter.RoA(), locObj.RoA().ReadProp(property))
+							.CallVoid("WriteValue", writerRef, localP != null ? localP.AstLoad() : objArg.ReadProp(property))
 						);
-					#endregion
 				}
-				else if (typeof(IPlistSerializable).IsAssignableFrom(property.PropertyType))
+				#endregion
+				else if (property.PlistSerializableType())
+				#region Use IPlistSerializable interface methods of the property type.
 				{
 					tb.Add(
-						locObj.RoA()
-							.ReadPropRef(property)
+						localP
+							.AstLoadRef()
 							.Cast(typeof(IPlistSerializable))
-							.CallVoid("Write", locWriter.RoA())
+							.CallVoid("Write", writerRef)
+						);
+				}
+				#endregion
+				else if (isPropNullable)
+				{
+					var m = GetMethodInfo(property.GetUnderlyingType());
+					tb.Add(
+						m != null
+							? m.CallVoid(
+								writerRef,
+								localP.AstLoadRefOrAddr().ReadPropVal(property.PropertyType.GetProperty("Value"))
+							)
+							: writerRef.CallVoid("Write", localP.AstLoad())
 						);
 				}
 				else
+				#region Find something suitable from base methods or use PlistWriter
 				{
-					var testM = TypeWriterBase.GetMethodInfo(
-						isPropNullable
-						? Nullable.GetUnderlyingType(property.PropertyType)
-						: property.PropertyType
-					);
+					var testM = GetMethodInfo(property.PropertyType);
 					tb.Add(
 						testM != null
-							? Ast.This.CallVoid(testM, locWriter.RoA(), locObj.RoA().ReadProp(property))
-							: locWriter.Ref().CallVoid("Write", locObj.RoA().ReadProp(property))
-						);
+							? testM.CallVoid(writerRef, localP != null ? localP.AstLoad() : objArg.ReadProp(property))
+							: writerRef.CallVoid("Write", localP != null ? localP.AstLoad() : objArg.ReadProp(property))
+					);
 				}
+				#endregion
 
 				#region Check property value supression
 
-				if (!property.PropertyType.IsValueType)
-					yield return
-						Ast.If(
-							locObj.RoA().ReadPropRef(property).NotNull(), Ast.Complex(tb)
-						);
-				else if (isPropNullable)
-					yield return
-						Ast.If(
-							locObj.RoA().ReadPropVal(property).NotNull(), Ast.Complex(tb)
-						);
+				if (localP != null)
+					yield return localP.AstLoadRefOrAddr().IfNotNull(Ast.Complex(tb), null);
 				else
 					yield return Ast.Complex(tb);
 
 				#endregion
 
 			}
-			yield return Ast.CallVoid("WriteEndElement", locWriter);
-		}
 
-		private IEnumerable<IAstNode> BuildWriterWithMethod(ILGenerator ilGen, MethodInfo mi, LocalBuilder locWriter, bool withKey)
-		{
-			var locObj = ilGen.DeclareLocal(typeof(object));
-			yield return BuilderUtils.InitializeLocal(locObj, 2);
 
-			var mc = Ast.Complex();
-			if (withKey)
-			{
-				var locKey = ilGen.DeclareLocal(typeof(string));
-				yield return BuilderUtils.InitializeLocal(locKey, 3);
-				mc.nodes.Add(locWriter.RoA().CallVoid("WriteKey", locKey.Ref()));
-			}
-			mc.nodes.Add(
-				Ast.This.CallVoid(mi, locWriter.RoA(), locObj.Ref())
-				);
-			
-			#region Check value supression
-			if (!_actualType.IsValueType)
-			{
-				yield return Ast.If(
-					locObj.Ref().NotNull(), mc
-					);
-			}
-			else if (_isNullable)
-				yield return Ast.If(
-						locObj.Val().NotNull(), mc
-					);
-			else
-				yield return mc;
-			#endregion
-
+			//Write closing element
+			yield return writerRef.CallVoid("WriteEndElement");
 			yield return Ast.RetVoid;
+
 		}
 
 		public void BuildConstructor()
@@ -222,5 +196,62 @@ namespace Plist.Emit
 			compilationContext.Emit(OpCodes.Stfld, _soFld);
 			compilationContext.Emit(OpCodes.Ret);
 		}
+
+
+		#region Base writer methods
+
+		public static MethodInfo GetBoxedMethodInfo(Type objectType)
+		{
+
+			if (objectType.IsValueType)
+				return CreateValueTypeWriteMethod(objectType);
+			if (objectType.IsEnum)
+				return typeof(PlistWriter).GetMethod("WriteEnum", new[] { typeof(object) });
+			if (objectType == typeof(string))
+				return typeof(PlistWriter).GetMethod("WriteString", new[] { typeof(object) });
+			if (objectType.IsArray && objectType.HasElementType && objectType.GetElementType() == typeof(byte))
+				return typeof(PlistWriter).GetMethod("WriteData", new[] { typeof(byte[]) });
+			return null;
+		}
+		private static MethodInfo CreateValueTypeWriteMethod(Type objectType)
+		{
+			if (objectType.IsPrimitive)
+			// Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Char, Double, Single. 
+			{
+				if (typeof(Boolean) == objectType)
+					return typeof(PlistWriter).GetMethod("WriteBoolean", new[] { typeof(object) });
+				if (typeof(Single) == objectType || typeof(Double) == objectType)
+					return typeof(PlistWriter).GetMethod("WriteReal", new[] { typeof(object) });
+				if (typeof(Char) == objectType)
+					return typeof(PlistWriter).GetMethod("WriteString", new[] { typeof(object) });
+
+				//if (typeof(Int16) == actualType|| typeof(Int32) == actualType|| typeof(Int64) == actualType|| typeof(UInt16) == actualType
+				//|| typeof(UInt32) == actualType|| typeof(UInt64) == actualType|| typeof(Byte) == actualType|| typeof(SByte) == actualType)
+				return typeof(PlistWriter).GetMethod("WriteInteger", new[] { typeof(object) });
+			}
+
+			if (typeof(Decimal) == objectType)
+				return typeof(PlistWriter).GetMethod("WriteReal", new[] { typeof(object) });
+			if (typeof(DateTime) == objectType)
+				return typeof(PlistWriter).GetMethod("WriteDate", new[] { typeof(object) });
+
+			return typeof(PlistWriter).GetMethod("WriteString", new[] { typeof(object) });
+		}
+
+		public static MethodInfo GetMethodInfo(Type objectType)
+		{
+			if (typeof(object) != objectType)
+			{
+				var method = typeof(PlistWriter).GetMethod("Write", new[] { objectType });
+				if (method != null && method.GetParameters().First().ParameterType != typeof(object))
+					return method;
+			}
+			if (objectType.IsValueType)
+				return typeof(PlistWriter).GetMethod("WriteString", new[] { typeof(object) });
+			return null;
+		}
+
+		#endregion
+
 	}
 }

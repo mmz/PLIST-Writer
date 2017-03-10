@@ -1,25 +1,21 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plist", "Plist\Plist.csproj", "{A0CA3CCB-A4D8-46AB-8026-EB74539AAB21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plist.Test", "Plist.Test\Plist.Test.csproj", "{44B47035-CE4D-424B-A750-F3640BD60372}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{09667B88-E33B-476A-84CC-658CDC09DB09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitHelper", "EmitHelper\EmitHelper.csproj", "{64628009-76C7-42B0-9370-24EF9C8ADFE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitHelper.Test", "EmitHelper.Test\EmitHelper.Test.csproj", "{A22792EB-220C-462E-BDE1-6559EABFD13F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlistTests", "PlistTests\PlistTests.csproj", "{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs33
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Plist\\Plist.csproj
-		SccProjectName1 = Plist
-		SccLocalPath1 = Plist
-		SccProjectUniqueName2 = Plist.Test\\Plist.Test.csproj
-		SccProjectName2 = Plist.Test
-		SccLocalPath2 = Plist.Test
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -33,8 +29,41 @@ Global
 		{44B47035-CE4D-424B-A750-F3640BD60372}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44B47035-CE4D-424B-A750-F3640BD60372}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44B47035-CE4D-424B-A750-F3640BD60372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64628009-76C7-42B0-9370-24EF9C8ADFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64628009-76C7-42B0-9370-24EF9C8ADFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64628009-76C7-42B0-9370-24EF9C8ADFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64628009-76C7-42B0-9370-24EF9C8ADFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs33
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Plist\\Plist.csproj
+		SccProjectName1 = Plist
+		SccLocalPath1 = Plist
+		SccProjectUniqueName2 = Plist.Test\\Plist.Test.csproj
+		SccProjectName2 = Plist.Test
+		SccLocalPath2 = Plist.Test
+		SccProjectUniqueName3 = EmitHelper\\EmitHelper.csproj
+		SccProjectName3 = EmitHelper
+		SccLocalPath3 = EmitHelper
+		SccProjectUniqueName4 = EmitHelper.Test\\EmitHelper.Test.csproj
+		SccProjectName4 = EmitHelper.Test
+		SccLocalPath4 = EmitHelper.Test
+		SccProjectUniqueName5 = PlistTests\\PlistTests.csproj
+		SccProjectName5 = PlistTests
+		SccLocalPath5 = PlistTests
 	EndGlobalSection
 EndGlobal
