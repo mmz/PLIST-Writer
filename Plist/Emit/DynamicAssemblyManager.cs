@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection.Emit;
 using System.Reflection;
+using Plist.Writers;
 
 namespace Plist.Emit
 {
@@ -9,22 +10,24 @@ namespace Plist.Emit
 	{
 		#region Non-public members
 
+		private const string ASSEMBLY_NAME = "PlistDynamicAssembly";
+		private const string MODULE_NAME = "PlistDynamicMod";
 		private static readonly AssemblyName AssemblyName;
 		private static readonly AssemblyBuilder AssemblyBuilder;
 		private static readonly ModuleBuilder ModuleBuilder;
 
 		static DynamicAssemblyHelper()
 		{
-			AssemblyName = new AssemblyName("PlistAssembly");
+			AssemblyName = new AssemblyName(ASSEMBLY_NAME);
 			AssemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
 				AssemblyName,
-				AssemblyBuilderAccess.RunAndSave
+				AssemblyBuilderAccess.Run
 				);
 
 			ModuleBuilder = AssemblyBuilder.DefineDynamicModule(
-				AssemblyName.Name,
-				AssemblyName.Name + ".dll",
-				true);
+				MODULE_NAME
+				//,AssemblyName.Name + ".dll",true
+				);
 		}
 
 		private static string CheckTypeName(string typeName)

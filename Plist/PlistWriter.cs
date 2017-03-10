@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Xml;
+using Plist.Writers;
 
 namespace Plist
 {
@@ -9,7 +11,7 @@ namespace Plist
 		public XmlWriter XmlWriter { get; protected set; }
 		public int MaxRecursion { get; protected set; }
 		private int _nestLevel;
-
+		#region Ctor
 		public PlistWriter(XmlWriter xmlWriter) : this(xmlWriter, DEFAULT_MAX_RECURSION)
 		{
 		}
@@ -20,7 +22,7 @@ namespace Plist
 			MaxRecursion = maxRecursion;
 			XmlWriter = xmlWriter;
 		}
-
+		#endregion
 		#region Syntax helpers
 		/// <summary>
 		/// Writes the XML declaration with PropertyList-1.0.dtd
@@ -58,6 +60,46 @@ namespace Plist
 		}
 
 		/// <summary>
+		/// Writes out a "integer" start tag.
+		/// </summary>
+		public virtual void WriteIntegerStartElement()
+		{
+			XmlWriter.WriteStartElement(Plist.IntValueTag);
+		}
+
+		/// <summary>
+		/// Writes out a "real" start tag.
+		/// </summary>
+		public virtual void WriteRealStartElement()
+		{
+			XmlWriter.WriteStartElement(Plist.RealValueTag);
+		}
+
+		/// <summary>
+		/// Writes out a "real" start tag.
+		/// </summary>
+		public virtual void WriteDateStartElement()
+		{
+			XmlWriter.WriteStartElement(Plist.DateValueTag);
+		}
+
+		/// <summary>
+		/// Writes out a "string" start tag.
+		/// </summary>
+		public virtual void WriteStringStartElement()
+		{
+			XmlWriter.WriteStartElement(Plist.StringValueTag);
+		}
+
+		/// <summary>
+		/// Writes out string.
+		/// </summary>
+		public virtual void WriteRawString(string str)
+		{
+			XmlWriter.WriteString(str);
+		}
+
+		/// <summary>
 		/// Closes active element.
 		/// </summary>
 		public virtual void WriteEndElement()
@@ -90,21 +132,129 @@ namespace Plist
 			typeWriter.Write(this, value);
 			_nestLevel--;
 		}
+		#endregion
+
+		#region write types
+
+		#region Boolean
+		/// <summary>
+		/// Writes plist boolean value representation based upon the object passed in.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Boolean value)
+		{
+			XmlWriter.WriteStartElement(value ? Plist.TrueValueTag : Plist.FalseValueTag);
+			XmlWriter.WriteEndElement();
+		}
+		#endregion
+
+		#region DateTime
+		/// <summary>
+		/// Writes date and time into plist date tag.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(DateTime value)
+		{
+			XmlWriter.WriteElementString(Plist.DateValueTag, value.ToString(Plist.DateFormat));
+		}
+		#endregion
+
+		#region Real
+		/// <summary>
+		/// Writes value into plist real tag.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Decimal value)
+		{
+			XmlWriter.WriteElementString(Plist.RealValueTag, value.ToString(CultureInfo.InvariantCulture));
+		}
 
 		/// <summary>
-		/// Creates key-value pair 
+		/// Writes value into plist real tag.
 		/// </summary>
-		/// <param name="key"></param>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void Write(string key, object value)
+		public virtual void Write(Single value)
 		{
-
-			if (value == null)
-				return;
-			var objectType = value.GetType();
-			var typeWriter = TypeWriterBase.CreateTypeWriter(objectType);
-			typeWriter.Write(this, value, key);
+			XmlWriter.WriteElementString(Plist.RealValueTag, value.ToString(CultureInfo.InvariantCulture));
 		}
+
+		/// <summary>
+		/// Writes value into plist real tag.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Double value)
+		{
+			XmlWriter.WriteElementString(Plist.RealValueTag, value.ToString(CultureInfo.InvariantCulture));
+		}
+
+		#endregion
+
+		#region Integer
+		/// <summary>
+		/// Writes value into plist integer tag
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Int16 value)
+		{
+			XmlWriter.WriteElementString(Plist.IntValueTag, value.ToString(CultureInfo.InvariantCulture));
+		}
+
+		/// <summary>
+		/// Writes value into plist integer tag
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Int32 value)
+		{
+			XmlWriter.WriteElementString(Plist.IntValueTag, value.ToString(CultureInfo.InvariantCulture));
+		}
+
+		/// <summary>
+		/// Writes value into plist integer tag
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Int64 value)
+		{
+			XmlWriter.WriteElementString(Plist.IntValueTag, value.ToString(CultureInfo.InvariantCulture));
+		}
+
+		#endregion
+
+
+		#region Enum
+		/// <summary>
+		/// Writes value into plist string tag.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(Enum value)
+		{
+			XmlWriter.WriteElementString(Plist.StringValueTag, value.ToString("F"));
+		}
+
+		#endregion
+
+		/// <summary>
+		/// Writes byte array into plist data tag using base64 encoding.
+		/// </summary>
+		/// <param name="data">An object to represent in the PropertyList.</param>
+		public virtual void Write(byte[] data)
+		{
+			XmlWriter.WriteStartElement(Plist.DataValueTag);
+			XmlWriter.WriteBase64(data, 0, data.Length);
+			XmlWriter.WriteEndElement();
+		}
+
+		#region String
+
+		/// <summary>
+		/// Writes value into plist string tag.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public virtual void Write(string value)
+		{
+			XmlWriter.WriteElementString(Plist.StringValueTag, value);
+		}
+
+		#endregion
 
 		#endregion
 
@@ -113,9 +263,9 @@ namespace Plist
 		/// Writes value into plist integer tag
 		/// </summary>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteInteger(object value)
+		public void WriteInteger(object value)
 		{
-			WriteIntegerImpl(null, value);
+			WriteIntegerImpl(value);
 		}
 
 		/// <summary>
@@ -123,18 +273,20 @@ namespace Plist
 		/// </summary>
 		/// <param name="key">Key value.</param>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteInteger(string key, object value)
+		public void WriteInteger(string key, object value)
 		{
-			WriteIntegerImpl(key, value);
+			WriteKey(key);
+			WriteIntegerImpl(value);
 		}
+
 
 		/// <summary>
 		/// Writes value into plist real tag.
 		/// </summary>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteReal(object value)
+		public void WriteReal(object value)
 		{
-			WriteRealImpl(null, value);
+			WriteRealImpl(value);
 		}
 
 		/// <summary>
@@ -142,18 +294,19 @@ namespace Plist
 		/// </summary>
 		/// <param name="key">Key value.</param>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteReal(string key, object value)
+		public void WriteReal(string key, object value)
 		{
-			WriteRealImpl(key, value);
+			WriteKey(key);
+			WriteRealImpl(value);
 		}
 
 		/// <summary>
 		/// Writes value into plist string tag.
 		/// </summary>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteString(object value)
+		public void WriteString(object value)
 		{
-			WriteStringImpl(null, value);
+			WriteStringImpl(Convert.ToString(value, CultureInfo.InvariantCulture));
 		}
 
 		/// <summary>
@@ -161,18 +314,19 @@ namespace Plist
 		/// </summary>
 		/// <param name="key">Key value.</param>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteString(string key, object value)
+		public void WriteString(string key, object value)
 		{
-			WriteStringImpl(key, value);
+			WriteKey(key);
+			WriteStringImpl(Convert.ToString(value, CultureInfo.InvariantCulture));
 		}
 
 		/// <summary>
 		/// Writes plist boolean value representation based upon the object passed in.
 		/// </summary>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteBoolean(object value)
+		public void WriteBoolean(object value)
 		{
-			WriteBooleanImpl(null, value);
+			Write((bool)value);
 		}
 
 		/// <summary>
@@ -180,18 +334,19 @@ namespace Plist
 		/// </summary>
 		/// <param name="key">Key value.</param>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteBoolean(string key, object value)
+		public void WriteBoolean(string key, object value)
 		{
-			WriteBooleanImpl(key, value);
+			WriteKey(key);
+			Write((bool)value);
 		}
 
 		/// <summary>
 		/// Writes byte array into plist data tag using base64 encoding.
 		/// </summary>
 		/// <param name="data">An object to represent in the PropertyList.</param>
-		public virtual void WriteData(byte[] data)
+		public void WriteData(byte[] data)
 		{
-			WriteDataImpl(null, data);
+			Write(data);
 		}
 
 		/// <summary>
@@ -199,18 +354,19 @@ namespace Plist
 		/// </summary>
 		/// <param name="key">Key value.</param>
 		/// <param name="data">An object to represent in the PropertyList.</param>
-		public virtual void WriteData(string key, byte[] data)
+		public void WriteData(string key, byte[] data)
 		{
-			WriteDataImpl(key, data);
+			WriteKey(key);
+			Write(data);
 		}
 
 		/// <summary>
 		/// Writes date and time into plist date tag.
 		/// </summary>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteDate(object value)
+		public void WriteDate(object value)
 		{
-			WriteDateImpl(null, value);
+			Write((DateTime)value);
 		}
 
 		/// <summary>
@@ -218,71 +374,53 @@ namespace Plist
 		/// </summary>
 		/// <param name="key">Key value.</param>
 		/// <param name="value">An object to represent in the PropertyList.</param>
-		public virtual void WriteDate(string key, object value)
+		public void WriteDate(string key, object value)
 		{
-			WriteDateImpl(key, value);
+			WriteKey(key);
+			Write((DateTime)value);
 		}
+
+		#region Enum
+		/// <summary>
+		/// Writes enum value into plist string tag.
+		/// </summary>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public void WriteEnum(object value)
+		{
+			Write((Enum)value);
+		}
+
+		/// <summary>
+		/// Writes key value pair using plist string tag for enum value.
+		/// </summary>
+		/// <param name="key">Key value.</param>
+		/// <param name="value">An object to represent in the PropertyList.</param>
+		public void WriteEnum(string key, object value)
+		{
+			WriteKey(key);
+			Write((Enum)value);
+		}
+		#endregion
 		#endregion
 
 		#region Implementation
 
-		void WriteIntegerImpl(string key, object value)
+		protected virtual void WriteIntegerImpl(object value)
 		{
-			if (value == null)
-				return;
-			if (!string.IsNullOrEmpty(key))
-				WriteKey(key);
-			TypeWriterBase.WriteInt(this, value);
+			XmlWriter.WriteElementString(Plist.IntValueTag, Convert.ToString(value, CultureInfo.InvariantCulture));
 		}
 
-		void WriteRealImpl(string key, object value)
+		protected virtual void WriteRealImpl(object value)
 		{
-			if (value == null)
-				return;
-			if (!string.IsNullOrEmpty(key))
-				WriteKey(key);
-			TypeWriterBase.WriteReal(this, value);
+			XmlWriter.WriteElementString(Plist.RealValueTag, Convert.ToString(value, CultureInfo.InvariantCulture));
 		}
 
-		void WriteStringImpl(string key, object value)
+		protected virtual void WriteStringImpl(string value)
 		{
-			if (value == null)
-				return;
-			if (!string.IsNullOrEmpty(key))
-				WriteKey(key);
-			TypeWriterBase.WriteString(this, value);
-		}
-
-		void WriteBooleanImpl(string key, object value)
-		{
-			if (value == null)
-				return;
-			if (!string.IsNullOrEmpty(key))
-				WriteKey(key);
-			TypeWriterBase.WriteBool(this, value);
-		}
-
-		void WriteDataImpl(string key, byte[] data)
-		{
-			if (data == null || data.Length == 0)
-				return;
-			if (!string.IsNullOrEmpty(key))
-				WriteKey(key);
-			TypeWriterBase.WriteData(this, data);
-
-		}
-
-		void WriteDateImpl(string key, object value)
-		{
-			if (value == null)
-				return;
-			if (!string.IsNullOrEmpty(key))
-				WriteKey(key);
-
-			if (value is DateTime || value is DateTime?)
-				TypeWriterBase.WriteDate(this, value);
-			else
-				XmlWriter.WriteElementString(Plist.DateValueTag, value.ToString());
+			XmlWriter.WriteElementString(
+				Plist.StringValueTag,
+				value
+			);
 		}
 
 		#endregion

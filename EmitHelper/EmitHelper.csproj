@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{64628009-76C7-42B0-9370-24EF9C8ADFE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EmitHelper</RootNamespace>
+    <AssemblyName>EmitHelper</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ast\AstExtensions.cs" />
+    <Compile Include="Ast\CompilationContext.cs" />
+    <Compile Include="Ast\Helpers\AstBuildHelper.cs" />
+    <Compile Include="Ast\Helpers\CompilationHelper.cs" />
+    <Compile Include="Ast\ILCompilationException.cs" />
+    <Compile Include="Ast\Interfaces\IAstAddr.cs" />
+    <Compile Include="Ast\Interfaces\IAstNode.cs" />
+    <Compile Include="Ast\Interfaces\IAstRef.cs" />
+    <Compile Include="Ast\Interfaces\IAstRefOrAddr.cs" />
+    <Compile Include="Ast\Interfaces\IAstRefOrValue.cs" />
+    <Compile Include="Ast\Interfaces\IAstStackItem.cs" />
+    <Compile Include="Ast\Interfaces\IAstValue.cs" />
+    <Compile Include="Ast\Interfaces\ICompilationContext.cs" />
+    <Compile Include="Ast\Nodes\AstBox.cs" />
+    <Compile Include="Ast\Nodes\AstCallMethod.cs" />
+    <Compile Include="Ast\Nodes\AstCallMethodVoid.cs" />
+    <Compile Include="Ast\Nodes\AstCastClass.cs" />
+    <Compile Include="Ast\Nodes\AstComplexNode.cs" />
+    <Compile Include="Ast\Nodes\AstConstantInt32.cs" />
+    <Compile Include="Ast\Nodes\AstConstantNull.cs" />
+    <Compile Include="Ast\Nodes\AstConstantString.cs" />
+    <Compile Include="Ast\Nodes\AstExceptionHandlingBlock.cs" />
+    <Compile Include="Ast\Nodes\AstExprEquals.cs" />
+    <Compile Include="Ast\Nodes\AstExprIsNull.cs" />
+    <Compile Include="Ast\Nodes\AstExprNot.cs" />
+    <Compile Include="Ast\Nodes\AstIf.cs" />
+    <Compile Include="Ast\Nodes\AstIfFalseRetVoid.cs" />
+    <Compile Include="Ast\Nodes\AstIfNotNull.cs" />
+    <Compile Include="Ast\Nodes\AstIfTernar.cs" />
+    <Compile Include="Ast\Nodes\AstIndirectRead.cs" />
+    <Compile Include="Ast\Nodes\AstInitializeLocalVariable.cs" />
+    <Compile Include="Ast\Nodes\AstNewNullable.cs" />
+    <Compile Include="Ast\Nodes\AstNewObject.cs" />
+    <Compile Include="Ast\Nodes\AstNullCoalesce.cs" />
+    <Compile Include="Ast\Nodes\AstReadArgument.cs" />
+    <Compile Include="Ast\Nodes\AstReadArrayItem.cs" />
+    <Compile Include="Ast\Nodes\AstReadField.cs" />
+    <Compile Include="Ast\Nodes\AstReadLocal.cs" />
+    <Compile Include="Ast\Nodes\AstReadProperty.cs" />
+    <Compile Include="Ast\Nodes\AstReadThis.cs" />
+    <Compile Include="Ast\Nodes\AstReturn.cs" />
+    <Compile Include="Ast\Nodes\AstReturnVoid.cs" />
+    <Compile Include="Ast\Nodes\AstThrow.cs" />
+    <Compile Include="Ast\Nodes\AstTypeof.cs" />
+    <Compile Include="Ast\Nodes\AstUnbox.cs" />
+    <Compile Include="Ast\Nodes\AstValueToAddr.cs" />
+    <Compile Include="Ast\Nodes\AstWriteField.cs" />
+    <Compile Include="Ast\Nodes\AstWriteLocal.cs" />
+    <Compile Include="Ast\Nodes\AstWriteProperty.cs" />
+    <Compile Include="Extensions\Ast.cs" />
+    <Compile Include="Extensions\AstNodeExtensions.cs" />
+    <Compile Include="Extensions\LocalBuilderExtensions.cs" />
+    <Compile Include="Extensions\MethodInfoExtension.cs" />
+    <Compile Include="MiscUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionUtils.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

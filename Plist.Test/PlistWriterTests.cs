@@ -6,197 +6,24 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Plist.Test
 {
-	#region Test classes
-	[Serializable]
-	class CustomDictionary : Dictionary<string, string> { }
+	public partial class PlistWriterTests
+	{
 
-	public enum SimpleColors
-	{
-		Red = 1,
-		Green = 2,
-		Blue = 3
-	}
-	[Flags]
-	public enum MixedColors
-	{
-		Cyan = 0x1,
-		Yellow = 0x10,
-		Magenta = 0x100
-	}
+		private readonly ITestOutputHelper output;
 
-	public class TestPlistWriterAttribute : PlistValueWriterAttribute
-	{
-		public override void WriteValue(PlistWriter writer, object value)
+		public PlistWriterTests(ITestOutputHelper output)
 		{
-			Type t = value.GetType();
-			if (t.IsEnum)
-				writer.WriteInteger(Enum.Format(t, value, "D"));
-			else
-				writer.Write(value);
+			this.output = output;
 		}
-	}
 
-	public class CustomClassWriterAttribute : PlistValueWriterAttribute
-	{
-		public override void WriteValue(PlistWriter writer, object value)
-		{
-			var t = value as TestClassWithCustom;
-			writer.WriteString(t != null ? String.Format("{0}, {1}", t.Name, t.City) : null);
-		}
-	}
-
-	public class CustoPropWriterAttribute : PlistValueWriterAttribute
-	{
-		public override void WriteValue(PlistWriter writer, object value)
-		{
-			if (value is DateTime)
-				writer.WriteString(((DateTime)value).ToString("yyyy"));
-			else
-				writer.Write(value);
-
-		}
-	}
-
-	[CustomClassWriter]
-	public class TestClassWithCustom
-	{
-		public string Name { get; set; }
-		public string City { get; set; }
-	}
-	[Serializable]
-	public class TestClassWithCustomPropWriter
-	{
-		public string Name { get; set; }
-		[CustoPropWriter]
-		public DateTime Year { get; set; }
-	}
-	[Serializable]
-	public class TestClassWithIgnorePropAtt
-	{
-		public string Visible { get; set; }
-		[PlistIgnore]
-		public string IgnoreMe { get; set; }
-	}
-
-	[PlistSerializableAttribute]
-	public class AttributesTestClass
-	{
-		[TestPlistWriter]
-		public SimpleColors SColors { get; set; }
-		[TestPlistWriter]
-		public MixedColors MColors { get; set; }
-
-		public MixedColors MoreColors { get; set; }
-		[PlistIgnore]
-		public TestClass Empty { get; set; }
-		[PlistIgnore]
-		public string UnusableData { get; set; }
-		[PlistIgnore]
-		public string[] UnusableDataToo { get; set; }
-
-		[PlistKey("Name")]
-		public string FullName { get; set; }
-
-		public TestClass Person { get; set; }
-
-		public TestClass2 Person2 { get; set; }
-
-		public int? NIntEmpty { get; set; }
-		public DateTime? NdateEmpty { get; set; }
-
-		public int? NInt { get; set; }
-
-		public Dictionary<string, object> Dict { get; set; }
-
-		[PlistIgnore]
-		public byte[] Image { get; set; }
-
-
-	}
-
-	[Serializable]
-	public class TestClass
-	{
-		public int Id { get; private set; }
-
-		public string Name { get; private set; }
-
-		public int Age { get; private set; }
-
-		public string[] Cars { get; private set; }
-
-		public TestClass(int id, string name, int age, string[] cars)
-		{
-			Id = id;
-			Name = name;
-			Age = age;
-			Cars = cars;
-		}
-	}
-	[Serializable]
-	public class TestClass2
-	{
-		public int Id { get; private set; }
-
-		public string Name { get; private set; }
-
-		public int? Age { get; private set; }
-
-		public string[] Cars { get; private set; }
-
-		public TestClass2(int id, string name, int age, string[] cars)
-		{
-			Id = id;
-			Name = name;
-			Age = age;
-			Cars = cars;
-		}
-	}
-	#endregion
-
-	[Serializable]
-	public class ModelItem
-	{
-		[PlistKey("Id")]
-		public Guid PersonId { get; set; }
-
-		public string Name { get; set; }
-
-		public int Age { get; set; }
-
-		[PlistIgnore]
-		public string Password { get; set; }
-	}
-
-	static class TH
-	{
-		public static Stopwatch Run(this Action action, int loops, Action before, Action after)
-		{
-			
-			var sw = new Stopwatch();
-			for (var i = 0; i < loops; i++)
-			{
-				if (before != null)
-					before();
-				sw.Start();
-				action();
-				sw.Stop();
-				if (after != null)
-					after();
-			}
-			return sw;
-		}
-	}
-	public class PlistWriterTests
-	{
-
-		[Fact]
+		[Fact]//(Skip = "4")
 		public void Timing()
 		{
-			var stream = new MemoryStream();
+			var stream = new NullStream();
 
 
 			int iterations = 100000;
@@ -246,26 +73,26 @@ namespace Plist.Test
 
 
 			sw = TH.Run(() => obj.WritePlistDocument(stream), iterations, null, () => { totalBytes += stream.Position; stream.Position = 0; });
-			Trace.TraceInformation("Class complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
+			output.WriteLine("Class complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
 			totalBytes = 0;
 			overall += sw.ElapsedMilliseconds;
 
 			sw = TH.Run(() => obj2.WritePlistDocument(stream), iterations, null, () => { totalBytes += stream.Position; stream.Position = 0; });
-			Trace.TraceInformation("Class2 complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
+			output.WriteLine("Class2 complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
 			totalBytes = 0;
 			overall += sw.ElapsedMilliseconds;
 
 			sw = TH.Run(() => arr.WritePlistDocument(stream), iterations, null, () => { totalBytes += stream.Position; stream.Position = 0; });
-			Trace.TraceInformation("Array complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
+			output.WriteLine("Array complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
 			totalBytes = 0;
 			overall += sw.ElapsedMilliseconds;
 
 			sw = TH.Run(() => dict.WritePlistDocument(stream), iterations, null, () => { totalBytes += stream.Position; stream.Position = 0; });
-			Trace.TraceInformation("Dictionary complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
+			output.WriteLine("Dictionary complete, {1} bytes writed in {0}ms.", sw.ElapsedMilliseconds, totalBytes);
 			totalBytes = 0;
 			overall += sw.ElapsedMilliseconds;
 
-			Trace.TraceInformation("All complete in {0}ms", overall);
+			output.WriteLine("All complete in {0}ms", overall);
 
 			overall = 0;
 			//Assert.InRange(sw.ElapsedMilliseconds, 0, 3000);
@@ -717,7 +544,7 @@ namespace Plist.Test
 		}
 
 
-		[Fact]
+		[Fact]//(Skip = "hz")
 		public void CreateDocumentFromClassWithAttributes()
 		{
 			var value = new AttributesTestClass
@@ -729,7 +556,7 @@ namespace Plist.Test
 				UnusableDataToo = new[] { "This should not be seen", "And another one" },
 				FullName = "John Doe",
 				MoreColors = MixedColors.Cyan | MixedColors.Yellow,
-				Person = new TestClass(2, "Joe Cox", 39, new[] { "Prius", "SkyLine" }),
+				Person = new TestClass(2, "Joe Cox", 36, new[] { "Prius", "SkyLine" }),
 				Person2 = new TestClass2(7, "Joe Richardson", 39, new[] { "DeLorean", "BMW Z8" }),
 				NInt = 10
 				,
@@ -767,7 +594,7 @@ namespace Plist.Test
 			<key>Name</key>
 			<string>Joe Cox</string>
 			<key>Age</key>
-			<integer>39</integer>
+			<integer>36</integer>
 			<key>Cars</key>
 			<array>
 				<string>Prius</string>
