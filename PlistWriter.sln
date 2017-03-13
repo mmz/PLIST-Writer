@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitHelper", "EmitHelper\Em
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitHelper.Test", "EmitHelper.Test\EmitHelper.Test.csproj", "{A22792EB-220C-462E-BDE1-6559EABFD13F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlistTests", "PlistTests\PlistTests.csproj", "{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,16 +35,12 @@ Global
 		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A22792EB-220C-462E-BDE1-6559EABFD13F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F2DE465-E222-4A0E-B292-1B3E5EA2F92E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs33
 		SccLocalPath0 = .
@@ -62,8 +56,5 @@ Global
 		SccProjectUniqueName4 = EmitHelper.Test\\EmitHelper.Test.csproj
 		SccProjectName4 = EmitHelper.Test
 		SccLocalPath4 = EmitHelper.Test
-		SccProjectUniqueName5 = PlistTests\\PlistTests.csproj
-		SccProjectName5 = PlistTests
-		SccLocalPath5 = PlistTests
 	EndGlobalSection
 EndGlobal
