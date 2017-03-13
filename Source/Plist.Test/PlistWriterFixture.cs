@@ -144,18 +144,12 @@ namespace Plist.Test
 
 				foreach (var str in p)
 					mockWriter.SetupStep("WriteStringImpl", str);
-				//mockWriter.SetupStep(w => w.Write(str));
 
 				mockWriter.SetupStep(w => w.WriteEndElement());
 
 				mockWriter.Object.Write(array);
 				mockWriter.VerifyAll();
 			}
-
-			//mockWriter.Reset();
-			//mockWriter.Object.Write(array);
-			//mock.Verify(w => w.WriteStartElement(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()),
-			//	Times.Exactly(p.Length + 1));
 		}
 	}
 }
