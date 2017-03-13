@@ -35,7 +35,7 @@ namespace Plist.Writers
 			{
 				if (dictionaryEnumerator.Value == null)
 					continue;
-				_valueWriter.Value.Write(writer, dictionaryEnumerator.Value, Convert.ToString(dictionaryEnumerator.Key, CultureInfo.InvariantCulture));
+				_valueWriter.Value.Write(writer, Convert.ToString(dictionaryEnumerator.Key, CultureInfo.InvariantCulture), dictionaryEnumerator.Value);
 			}
 			writer.WriteEndElement();
 		}

@@ -56,6 +56,8 @@
     <Compile Include="Emit\DynamicAssemblyManager.cs" />
     <Compile Include="Writers\EnumerableWriter.cs" />
     <Compile Include="Emit\TypeWriterBuilder.cs" />
+    <Compile Include="Writers\GeneralTypeWriter.cs" />
+    <Compile Include="Writers\VoidTypeWriter.cs" />
     <Compile Include="Writers\WriterStore.cs" />
     <Compile Include="IPlistSerializable.cs" />
     <Compile Include="PlistWriter.cs" />

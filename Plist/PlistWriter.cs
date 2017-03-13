@@ -132,6 +132,16 @@ namespace Plist
 			typeWriter.Write(this, value);
 			_nestLevel--;
 		}
+		public virtual void Write(string key, object value)
+		{
+			if (value == null || _nestLevel > MaxRecursion)
+				return;
+			_nestLevel++;
+			var objectType = value.GetType();
+			var typeWriter = TypeWriterBase.CreateTypeWriter(objectType);
+			typeWriter.Write(this, key, value);
+			_nestLevel--;
+		}
 		#endregion
 
 		#region write types

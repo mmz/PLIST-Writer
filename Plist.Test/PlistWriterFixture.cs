@@ -14,10 +14,20 @@ namespace Plist.Test
 {
 	public partial class PlistWriterFixture
 	{
-		[Fact]
-		public void WriteClassWithNullableProps()
+
+		[Serializable]
+		public class NullableTestClass
 		{
-			var value = new TestClass2(7, "Joe Richardson", 39, new[] {"DeLorean", "BMW Z8"});
+			public int? NullableIntProp { get; set; }
+
+			public string[] StringArrayProp { get; set; }
+
+			public int IntProp { get; set; }
+		}
+		[Fact]
+		public void Nullable_Property_HasValue_And_Uses_Write_Method()
+		{
+			var value = new NullableTestClass {NullableIntProp = 98, IntProp = 2, StringArrayProp = new[] {"One", "Two"}};
 			var mock = new Mock<XmlWriter>();//
 			var mockWriter = new Mock<PlistWriter>(mock.Object) { CallBase = true, DefaultValue = DefaultValue.Mock };
 			//value.Age = null;
@@ -26,22 +36,17 @@ namespace Plist.Test
 				#region Setup
 				mockWriter.SetupStep(w => w.WriteDictionaryStartElement());
 
-				mockWriter.SetupStep(w => w.WriteKey("Id"));
-				mockWriter.SetupStep(w => w.Write(7));
-				mockWriter.SetupStep(w => w.WriteKey("Name"));
-				mockWriter.SetupStep(w => w.Write("Joe Richardson"));
-				mockWriter.SetupStep(w => w.WriteKey("Age"));
-				mockWriter.SetupStep(w => w.Write(39));
-				mockWriter.SetupStep(w => w.WriteKey("Cars"));
-
-				mockWriter.SetupStep(w =>w.WriteArrayStartElement());
-
-				//mockWriter.SetupStep(w => w.WriteKey("Height"));
-				//mockWriter.SetupStep(w => w.Write(1.75m));
-				//mockWriter.SetupStep(w => w.WriteKey("Agee"));
-				//mockWriter.SetupStep(w => w.Write(30));
-
+				mockWriter.SetupStep(w => w.WriteKey("NullableIntProp"));
+				mockWriter.SetupStep(w => w.Write(98));
+				mockWriter.SetupStep(w => w.WriteKey("StringArrayProp"));
+				mockWriter.SetupStep(w => w.WriteArrayStartElement());
+				mockWriter.SetupStep("WriteStringImpl", "One");
+				mockWriter.SetupStep("WriteStringImpl", "Two");
 				mockWriter.SetupStep(w => w.WriteEndElement());
+
+				mockWriter.SetupStep(w => w.WriteKey("IntProp"));
+				mockWriter.SetupStep(w => w.Write(2));
+
 				mockWriter.SetupStep(w => w.WriteEndElement());
 
 
@@ -49,6 +54,31 @@ namespace Plist.Test
 				mockWriter.Object.Write(value);
 				mockWriter.VerifyAll();
 				Assert.True(Sequence.Active.Complete);
+			}
+		}
+		[Fact]
+		public void Nullable_Property_Without_Value_Writes_Nothing()
+		{
+			var value = new NullableTestClass { NullableIntProp = null, IntProp = 2, StringArrayProp = null };
+			var mock = new Mock<XmlWriter>();//
+			var mockWriter = new Mock<PlistWriter>(mock.Object) { CallBase = true, DefaultValue = DefaultValue.Mock };
+			//value.Age = null;
+			using (new Sequence())
+			{
+				#region Setup
+				mockWriter.SetupStep(w => w.WriteDictionaryStartElement());
+				
+				mockWriter.SetupStep(w => w.WriteKey("IntProp"));
+				mockWriter.SetupStep(w => w.Write(2));
+
+				mockWriter.SetupStep(w => w.WriteEndElement());
+
+
+				#endregion
+				mockWriter.Object.Write(value);
+				mockWriter.VerifyAll();
+				Assert.True(Sequence.Active.Complete);
+				mockWriter.Verify(w => w.WriteKey(It.IsAny<string>()), Times.Once);
 			}
 		}
 

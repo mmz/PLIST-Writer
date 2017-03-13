@@ -38,7 +38,10 @@ namespace Plist
 		}
 		public static bool PlistIgnore(this PropertyInfo propertyInfo)
 		{
-			return propertyInfo.GetCustomAttributes(typeof(PlistIgnoreAttribute), false).Any();
+			return 
+				propertyInfo.GetCustomAttributes(typeof(PlistIgnoreAttribute), false).Any()
+				|| 
+				propertyInfo.PropertyType.GetCustomAttributes(typeof(PlistIgnoreAttribute), true).Any();
 		}
 		public static bool PlistSerializableType(this PropertyInfo propertyInfo)
 		{

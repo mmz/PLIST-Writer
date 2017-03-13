@@ -77,6 +77,7 @@
     <Compile Include="Helpers\MoqHelper.cs" />
     <Compile Include="Helpers\Sequence.cs" />
     <Compile Include="PlistWriterFixture.cs" />
+    <Compile Include="PlistWriterFixture_Attributes.cs" />
     <Compile Include="PlistWriterFixture_Boxed.cs" />
     <Compile Include="PlistWriterFixture_Nullable.cs" />
     <Compile Include="PlistWriterFixture_Outputs.cs" />
