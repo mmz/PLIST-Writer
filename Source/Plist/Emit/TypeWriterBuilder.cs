@@ -248,7 +248,7 @@ namespace Plist.Emit
 			if (typeof(object) != objectType)
 			{
 				var method = typeof(PlistWriter).GetMethod("Write", new[] { objectType });
-				if (method != null && method.GetParameters().First().ParameterType != typeof(object))
+				if (method != null)
 					return method;
 			}
 			if (objectType.IsValueType)
