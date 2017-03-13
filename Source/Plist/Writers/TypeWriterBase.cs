@@ -24,13 +24,14 @@ namespace Plist.Writers
 		{
 			WriteImpl(writer, obj);
 		}
+
 		/// <summary>
 		/// Calls <paramref name="obj"/> type-specific writing strategy using <paramref name="writer"/> with <paramref name="key"/>
 		/// </summary>
 		/// <param name="writer"></param>
-		/// <param name="obj"></param>
 		/// <param name="key"></param>
-		public void Write(PlistWriter writer, object obj, string key)
+		/// <param name="obj"></param>
+		public void Write(PlistWriter writer, string key, object obj)
 		{
 			WriteImpl(writer, obj, key);
 		}
@@ -42,17 +43,10 @@ namespace Plist.Writers
 		#region Static
 		public static TypeWriterBase CreateTypeWriter(Type objectType)
 		{
-			if (typeof(object) == objectType)
-				return new ActionTypeWriter(
-					(writer, obj) =>
-					{
-						var typeWriter = CreateTypeWriterImpl(obj.GetType());
-						typeWriter.Write(writer, obj);
-					});
-			return CreateTypeWriterImpl(objectType);
+			return typeof(object) == objectType ? new GeneralTypeWriter() : GetTypeWriter(objectType);
 		}
 
-		private static TypeWriterBase CreateTypeWriterImpl(Type objectType)
+		protected static TypeWriterBase GetTypeWriter(Type objectType)
 		{
 			return WriterStore.GetWriter(objectType, () => CreateWriterInstance(objectType));
 		}
@@ -72,7 +66,7 @@ namespace Plist.Writers
 			}
 
 			if (objectType.PlistIgnore())
-				return new ActionTypeWriter((writer, obj) => { });
+				return new VoidTypeWriter();
 
 			if (objectType.IsValueType || typeof(string) == objectType)
 				return ConstructWriter(objectType);
@@ -126,47 +120,7 @@ namespace Plist.Writers
 		}
 		
 		#endregion
-
-		#region Data objects
-		//public static void WriteDataSet(PlistWriter writer, DataSet value)
-		//{
-		//	writer.WriteArrayStartElement();
-		//	foreach (DataTable table in value.Tables)
-		//	{
-		//		WriteDataTable(writer, table);
-		//	}
-
-		//	writer.WriteEndElement();
-		//}
-		//public void WriteDataRow(PlistWriter writer, DataRow value)
-		//{
-
-		//	if (value == null)
-		//		return;
-		//	var ms = GenerateRowSerializer(value.Table.Columns);
-		//	writer.WriteDictionaryStartElement();
-		//	foreach (var action in ms)
-		//		action(writer, value);
-		//	writer.WriteEndElement();
-
-		//}
-		//private static IEnumerable<Action<PlistWriter, DataRow>> GenerateRowSerializer(DataColumnCollection columns)
-		//{
-		//	return
-		//		from DataColumn column in columns
-		//		let tWriter = CreateTypeWriter(column.DataType)
-		//		let o = column.Ordinal
-		//		let n = column.ColumnName
-		//		select (Action<PlistWriter, DataRow>)
-		//		((writer, row) =>
-		//			{
-		//				var value = row[o];
-		//				if (value.Equals(DBNull.Value))
-		//					return;
-		//				tWriter.Write(writer, value, column.ColumnName);
-		//			});
-		//}
-		#endregion
+		
 
 	}
 }

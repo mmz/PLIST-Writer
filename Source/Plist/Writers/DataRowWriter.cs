@@ -46,7 +46,7 @@ namespace Plist.Writers
 					var value = row[o];
 					if (value.Equals(DBNull.Value))
 						return;
-					tWriter.Write(writer, value, column.ColumnName);
+					tWriter.Write(writer, column.ColumnName, value);
 				});
 		}
 	}

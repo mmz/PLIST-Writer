@@ -94,6 +94,11 @@ namespace Plist.Emit
 			//iterate through properties
 			foreach (var property in _objectType.GetProperties().Where(p => !p.PlistIgnore()))
 			{
+				if (property.PropertyType == typeof(object))
+				{
+					writerRef.CallVoid("Write", Ast.Const(property.GetPlistKey()), objArg.ReadProp(property));
+					continue;
+				}
 				LocalBuilder localP = null;
 				var isPropNullable = property.IsNullable();
 
