@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Xml;
 using Moq;
+using Plist.Test.Helpers;
 using Xunit;
 
 namespace Plist.Test
@@ -16,12 +17,14 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.TrueValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.TrueValueTag, null));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(value);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -33,12 +36,14 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.FalseValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.FalseValueTag, null));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(value);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -54,13 +59,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			decimal? num = decimal.Parse(str, CultureInfo.InvariantCulture);
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.RealValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(str));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.RealValueTag, null));
+				mock.SetupStep(w => w.WriteString(str));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(num);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -73,13 +80,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			double? num = double.Parse(str, CultureInfo.InvariantCulture);
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.RealValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(str));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.RealValueTag, null));
+				mock.SetupStep(w => w.WriteString(str));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(num);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -92,13 +101,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			int? num = Int32.Parse(str, CultureInfo.InvariantCulture);
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.IntValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(str));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.IntValueTag, null));
+				mock.SetupStep(w => w.WriteString(str));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(num);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -111,13 +122,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			long? num = Int64.Parse(str, CultureInfo.InvariantCulture);
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.IntValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(str));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.IntValueTag, null));
+				mock.SetupStep(w => w.WriteString(str));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(num);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -130,13 +143,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			Single? num = Single.Parse(str, CultureInfo.InvariantCulture);
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.RealValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(str));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.RealValueTag, null));
+				mock.SetupStep(w => w.WriteString(str));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(num);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -150,13 +165,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			SimpleColors? value = color;
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.StringValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(Enum.Format(typeof(SimpleColors), color, "G")));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.StringValueTag, null));
+				mock.SetupStep(w => w.WriteString(Enum.Format(typeof(SimpleColors), color, "G")));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(value);
+
+				Sequence.AssertCompleted();
 			}
 		}
 
@@ -170,13 +187,15 @@ namespace Plist.Test
 			var pWriter = new PlistWriter(mock.Object);
 			MixedColors? value = color;
 
-			var sequence = new MockSequence();
+			using (new Sequence())
 			{
-				mock.InSequence(sequence).Setup(w => w.WriteStartElement(null, Plist.StringValueTag, null));
-				mock.InSequence(sequence).Setup(w => w.WriteString(Enum.Format(typeof(MixedColors), color, "G")));
-				mock.InSequence(sequence).Setup(w => w.WriteEndElement());
+				mock.SetupStep(w => w.WriteStartElement(null, Plist.StringValueTag, null));
+				mock.SetupStep(w => w.WriteString(Enum.Format(typeof(MixedColors), color, "G")));
+				mock.SetupStep(w => w.WriteEndElement());
 
 				pWriter.Write(value);
+
+				Sequence.AssertCompleted();
 			}
 		}
 	}

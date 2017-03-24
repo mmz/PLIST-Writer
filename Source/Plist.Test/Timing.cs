@@ -55,7 +55,7 @@ namespace Plist.Test
 			this.output = output;
 		}
 
-		[Fact]
+		[Fact(Skip = "no use")]
 		public void Test()
 		{
 			int iterations = 1000000;
@@ -69,85 +69,6 @@ namespace Plist.Test
 
 			var writer = XmlWriter.Create(stream, new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment });
 			var pwriter = new PlistWriter(writer);
-
-
-			//sw = TH.Run((i) =>
-			//{
-			//	pwriter.Write(i);
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("Write completed in {0}ms.", sw.ElapsedMilliseconds);
-			//sw = TH.Run((i) =>
-			//{
-			//	pwriter.Write1(i % 2 ==0);
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("Write1 completed in {0}ms.", sw.ElapsedMilliseconds);
-
-			//sw = TH.Run((i) =>
-			//{
-			//	pwriter.WriteESI(i);
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("WriteESI completed in {0}ms.", sw.ElapsedMilliseconds);
-
-			//sw = TH.Run((i) =>
-			//{
-			//	pwriter.WriteEC(i);
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("WriteEC completed in {0}ms.", sw.ElapsedMilliseconds);
-
-			//sw = TH.Run((i) =>
-			//{
-			//	pwriter.WriteInteger(i);
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("WriteInteger completed in {0}ms.", sw.ElapsedMilliseconds);
-
-			//sw = TH.Run((i) =>
-			//{
-			//	writer.WriteStartElement(Plist.StringValueTag);
-			//	writer.WriteString("test");
-			//	writer.WriteEndElement();
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("WriteValue completed in {0}ms.", sw.ElapsedMilliseconds);
-
-			//sw = TH.Run((i) =>
-			//{
-			//	writer.WriteElementString(Plist.StringValueTag, "test");
-			//	//writer.WriteString();
-			//	//writer.WriteEndElement();
-			//}, iterations, null, (i) => stream.Position = 0);
-
-			//output.WriteLine("WriteValue completed in {0}ms.", sw.ElapsedMilliseconds);
-
-
-			//sw = TH.Run((i) =>
-			//{
-			//	writer.WriteStartElement(Plist.RealValueTag);
-			//	writer.WriteString(i.ToString(CultureInfo.InvariantCulture));
-			//	//.WriteValue();
-			//	writer.WriteEndElement();
-
-			//}, iterations, null, (i) => stream.Position = 0);
-			//output.WriteLine("WriteString completed in {0}ms.", sw.ElapsedMilliseconds);
-
-
-			//sw = TH.Run((i) =>
-			//{
-			//	writer.WriteElementString(Plist.RealValueTag, i.ToString(CultureInfo.InvariantCulture));
-
-			//}, iterations, null, (i) => stream.Position = 0);
-			//output.WriteLine("WriteElementString completed in {0}ms.", sw.ElapsedMilliseconds);
-
-			//sw = TH.Run((i) =>
-			//{
-			//	writer.WriteElementString(Plist.RealValueTag, Convert.ToString(i, CultureInfo.InvariantCulture));
-
-			//}, iterations, null, (i) => stream.Position = 0);
-			//output.WriteLine("WriteElementString + Convert.ToString completed in {0}ms.", sw.ElapsedMilliseconds);
 		}
 	}
 }
