@@ -46,8 +46,7 @@ namespace Plist.Test
 			var mockWriter = new Mock<PlistWriter>(mock.Object) { CallBase = true, DefaultValue = DefaultValue.Mock };
 
 			mockWriter.Object.Write(value);
-
-
+			
 			mockWriter.Verify(m => m.WriteKey("StrProp"), Times.Once);
 			mockWriter.Verify(m => m.Write("I'm Slim Shady, yes I'm the real Shady"), Times.Once);
 
@@ -95,6 +94,7 @@ namespace Plist.Test
 			mockWriter.Verify(w => w.WriteDictionaryStartElement(), Times.Once);
 			mockWriter.Verify(w => w.WriteKey("StrProp"), Times.Once);
 			mockWriter.Verify(w => w.Write("Slim"), Times.Once);
+			mockWriter.Verify(w => w.WriteEndElement(), Times.Once);
 		}
 
 		public class WithOutAttribute
@@ -136,9 +136,6 @@ namespace Plist.Test
 
 			mockWriter.Object.Write(value);
 
-			mockWriter.Verify(m => m.WriteKey("IntProp"), Times.Once);
-			mockWriter.Verify(m => m.Write(3), Times.Once);
-
 			mockWriter.Verify(m => m.WriteKey("IgnoredProp"), Times.Never);
 			mockWriter.Verify(m => m.Write(2), Times.Never);
 			mockWriter.Protected().Verify("WriteIntegerImpl", Times.Never(), ItExpr.Is<object>(v => (int)v == 2));
@@ -164,9 +161,6 @@ namespace Plist.Test
 			var mockWriter = new Mock<PlistWriter>(mock.Object) { CallBase = true, DefaultValue = DefaultValue.Mock };
 
 			mockWriter.Object.Write(value);
-			mockWriter.Verify(w => w.WriteKey("First"), Times.Once);
-			mockWriter.Verify(w => w.WriteKey("Third"), Times.Once);
-
 
 			mockWriter.Verify(w => w.WriteKey("Second"), Times.Never);
 			mockWriter.Verify(m => m.Write(11), Times.Never);
@@ -194,8 +188,6 @@ namespace Plist.Test
 			var mockWriter = new Mock<PlistWriter>(mock.Object) { CallBase = true, DefaultValue = DefaultValue.Mock };
 
 			mockWriter.Object.Write(value);
-			mockWriter.Verify(w => w.WriteKey("NormalProp1"), Times.Once);
-
 
 			mockWriter.Verify(w => w.WriteKey("GeneralProp"), Times.Never);
 			mockWriter.Verify(w => w.WriteKey("IgnoredProp"), Times.Never);
@@ -219,12 +211,6 @@ namespace Plist.Test
 			var mockWriter = new Mock<PlistWriter>(mock.Object) { CallBase = true, DefaultValue = DefaultValue.Mock };
 
 			mockWriter.Object.Write(value);
-			mockWriter.Verify(w => w.WriteArrayStartElement(), Times.Once);
-			mockWriter.Protected().Verify("WriteIntegerImpl", Times.Once(), ItExpr.Is<object>(v => (int)v == 1));
-			mockWriter.Verify(w => w.WriteDictionaryStartElement(), Times.Once);
-			mockWriter.Verify(m => m.WriteKey("IntProp"), Times.Once);
-			mockWriter.Verify(m => m.Write(4), Times.Once);
-
 
 			mockWriter.Verify(w => w.WriteKey("PropOne"), Times.Never);
 			mockWriter.Verify(m => m.Write(2), Times.Never);

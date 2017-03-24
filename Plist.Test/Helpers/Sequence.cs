@@ -8,6 +8,17 @@ namespace Plist.Test.Helpers
 {
 	class Sequence : IDisposable
 	{
+		internal class IndexedCall
+		{
+			public Expression Expression;
+			public int Index;
+
+			public IndexedCall(int index, Expression expression)
+			{
+				Index = index;
+				Expression = expression;
+			}
+		}
 
 		[ThreadStatic]
 		private static Sequence _active;
@@ -16,10 +27,19 @@ namespace Plist.Test.Helpers
 		{
 			get
 			{
-				//if (_active == null)
-				//	throw new SequenceNotExists();
+				if (_active == null)
+					throw new SequenceNotExists();
 				return _active;
 			}
+		}
+
+		public static void AssertCompleted()
+		{
+			if (_active == null)
+				throw new SequenceNotExists();
+			if (_active.Complete)
+				return;
+			throw new SequenceNotCompletedException(_active);
 		}
 
 		public bool Complete
@@ -27,6 +47,7 @@ namespace Plist.Test.Helpers
 			get { return _exprCallIndex.All(i => i.Count == 0); }
 		}
 
+		public IndexedCall LastCall { get; set; }
 		private int _current;
 		private int _waitFor;
 
@@ -74,9 +95,27 @@ namespace Plist.Test.Helpers
 				//	return;
 				if (callIndex[0] != _waitFor)
 					throw new SequenceBrokenExtension(_exprIndex.FirstOrDefault(kvp => kvp.Value == index).Key, callIndex[0], _waitFor);
+				LastCall = new IndexedCall(index, _exprIndex.FirstOrDefault(kvp => kvp.Value == index).Key);
 				_exprCallIndex[index].Remove(_waitFor);
 				_waitFor++;
 			};
+		}
+	}
+
+	class SequenceNotCompletedException : Exception
+	{
+		public SequenceNotCompletedException(Sequence sequence) : base(CreateMessage(sequence))
+		{
+
+		}
+
+		private static string CreateMessage(Sequence sequence)
+		{
+			var lastCall = sequence.LastCall;
+			return lastCall == null
+				? "Sequence is not completed, no cals were made."
+				: $@"Sequence is not completed, last step was:
+{lastCall.Index} {lastCall.Expression}";
 		}
 	}
 
